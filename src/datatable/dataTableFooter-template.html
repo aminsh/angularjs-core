@@ -1,0 +1,38 @@
+<% if(columns.filter(function(column){return column.footer}).length > 0) { %>
+<tr>
+
+    <% columns.forEach(function(column){ %>
+    <td class="text-bold"># column.footer #</td>
+    <% }) %>
+
+    <% if(removable) { %>
+    <td></td>
+    <% } %>
+</tr>
+<% } %>
+
+<% footers.forEach(function(footer){ %>
+<tr <% Object.keys(footer.attrs).forEach(function(key) { %>
+        # key #="# footer.attrs[key] #"
+    <%}) %>
+>
+
+    <% footer.items.forEach(function(item){ %>
+    <td rowspan="# item.row_count #" colspan="# item.column_count #"
+
+        <% Object.keys(item.attrs).forEach(function(key) { %>
+        # key #="# item.attrs[key] #"
+        <%}) %>
+
+        >
+
+    # item.template #
+
+    </td>
+    <% }) %>
+
+    <% if(removable) { %>
+    <td></td>
+    <% } %>
+</tr>
+<% }) %>

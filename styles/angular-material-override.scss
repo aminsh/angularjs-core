@@ -1,0 +1,65 @@
+.md-button.md-icon-button {
+  height: 36px;
+  padding: 0;
+  min-height: 36px;
+  width: 36px;
+  margin: 0 8px;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  @media (max-width: 400px){
+    padding: 0;
+    margin: 0;
+    width: 25px;
+    height: 25px;
+    min-height: 25px;
+  }
+}
+
+md-sidenav{
+  z-index: 77;
+  height: calc(100vh - 63px);
+  @media (max-width: 960px){
+    position: fixed;
+    height: 100vh;
+  }
+  md-content {
+   // position: sticky;
+   // top: 63px;
+  }
+
+}
+.md-sidenav-backdrop{
+  @media (min-width: 960px){
+   display: none;
+  }
+}
+md-tabs-content-wrapper{
+  padding: 5px;
+}
+md-toolbar._md-toolbar-transitions {
+  -webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,0.26);
+  -moz-box-shadow:0 2px 5px 0 rgba(0,0,0,0.26);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+}
+[dir=rtl] md-dialog .md-actions, [dir=rtl] md-dialog md-dialog-actions {
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+  -moz-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+}
+//md-input-container {
+//  margin: 15px 0 5px 0;
+//  padding: 0 2px;
+//}
+//md-input-container .md-input-message-animation, md-input-container .md-char-counter {
+//  padding-top: 2px;
+//}
+.md-sidenav-right {
+  @media (max-width: 960px){
+    top: 56px;
+  }
+}
+
+md-select{
+  margin: 0;
+}

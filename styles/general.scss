@@ -1,0 +1,73 @@
+/***
+general.css
+ ***/
+
+.margin20px {
+  margin: 20px;
+}
+
+.padding10px {
+  padding: 10px;
+}
+
+.padding-bottom-10px {
+  padding-bottom: 10px;
+}
+
+.height10px{
+  height: 10px;
+}
+
+.height30px{
+  height: 30px;
+}
+
+.border-gray-bottom {
+  border-bottom: solid #ccc 1px;
+}
+
+.tbl {
+  th, td {
+    padding: 0 5px;
+    vertical-align: middle;
+  }
+}
+
+label {
+  margin: 0 !important;
+}
+
+.modal-30{
+  width: 30%;
+}
+
+@media (min-width: 991px){
+  .modal-30{
+    width: 30%;
+  }
+}
+
+@media (min-width: 767px) and (max-width: 990px){
+  .modal-30{
+    width: 60%;
+  }
+}
+
+
+/*** tabs ***/
+.modal-body {
+  //padding: 0 30px !important;
+}
+
+md-tab-content > div {
+  padding-top: 10px;
+}
+
+/*** tabs ***/
+
+/*** radio buttons ***/
+.iradio_square-green{
+  height: 30px !important;
+}
+/*** radio buttons ***/
+

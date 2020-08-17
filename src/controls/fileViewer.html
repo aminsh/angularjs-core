@@ -1,0 +1,36 @@
+<div layout="row"  layout-align="space-between" layout-wrap="">
+    <div flex="45" flex-xs="100"  ng-if="editable">
+        <div class="uploaderBox">
+            <a>
+                <ds-file-uploader is-singular="true"
+                                  uploader-action="uploader"
+                                  uploaded="onImageUploaded(fileName)"></ds-file-uploader>
+            </a>
+        </div>
+    </div>
+
+    <div flex="45" flex-xs="100" layout="row" layout-wrap="" > <!--ng-class="{'m-r': $index !== 0}"-->
+        <div flex="25" flex-sm="33" flex-xs="33" ng-repeat="file in files">
+            <div class="uploaderPreview">
+                <div ng-if="file.category === 'image'">
+                    <a href="/{{file.name}}" data-gallery="">
+                        <img src="/{{file.name}}"
+                             preload-image>
+                    </a>
+                </div>
+
+                <div ng-if="file.category !== 'image'">
+                    <a href="/{{file.name}}" target="_blank"><i class="fa fa-file"></i></a>
+                </div>
+
+                <div class="file-name">
+                    {{file.extension}}
+
+                    <span ng-if="editable">
+                        <md-icon md-svg-src="md-delete" class="pointer text-danger" aria-label="remove" title="{{'Remove'|translate}}" ng-click="remove(file)"></md-icon>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

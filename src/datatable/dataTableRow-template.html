@@ -1,0 +1,211 @@
+<tr ng-repeat# itemDetail === 'none' ? '' : '-start' #="item in items | orderBy: orderBy"
+    ng-click="setCurrent(item)"
+    ng-dblclick="onDblClicked(item)"
+    ng-keyup="keyup($event, item)"
+    ng-keydown="keyDown($event)"
+    id="{{item.id}}"
+    ng-form
+    name="form-{{$index}}"
+    ng-class="{'dataTable-tr-select': item === current }">
+
+<% columns.forEach(function(column, i) { %>
+<td class="p-r text-# column.align #" style="position: relative" # column.ngIf ? 'ng-if="' + column.ngIf + '"' : '' # >
+
+    <% if(i === 0) { %>
+    <div ng-if="form['form-'+ $index].$invalid" class="triangle"></div>
+    <% } %>
+
+    <% if(column.editor && column.editor.element === 'text') { %>
+    <input name="# column.name #"
+           ng-model="# column.ngModel #"
+           md-select-on-focus
+           class="form-control has-border-on-focus"
+
+    <% Object.keys(column.editor).forEach(function(key) { %>
+    # key #="# column.editor[key] #"
+    <%}) %>
+
+    >
+
+    <% } else if(column.editor && column.editor.element === 'number') { %>
+    <input  name="# column.name #"
+            awnum="default"
+            ng-model="# column.ngModel #"
+            md-select-on-focus
+            class="form-control has-border-on-focus no-margins"
+
+    <% Object.keys(column.editor).forEach(function(key) { %>
+    # key #="# column.editor[key] #"
+    <%}) %>
+
+    >
+
+    <% } else if(column.editor && column.editor.element === 'check') { %>
+    <md-checkbox name="# column.name #"
+           ng-model="# column.ngModel #" aria-label="grid check box"
+           class="md-primary ds-dataTable-checkbox"
+
+    <% Object.keys(column.editor).forEach(function(key) { %>
+    # key #="# column.editor[key] #"
+    <%}) %>
+
+    ></md-checkbox>
+
+    <% } else if(column.editor && column.editor.element === 'date') { %>
+    <ds-datepicker name="# column.name #"
+           ng-model="# column.ngModel #"
+           md-select-on-focus
+           class="ds-dataTable-datepicker"
+
+    <% Object.keys(column.editor).forEach(function(key) { %>
+    # key #="# column.editor[key] #"
+    <%}) %>
+
+    ></ds-datepicker>
+
+    <% } else if(column.editor && column.editor.element === 'select') { %>
+    <md-select ng-model="# column.ngModel #" class="has-border-on-focus" name="# column.name #"
+        <% Object.keys(column.editor).forEach(function(key) { %>
+        # key #="# column.editor[key] #"
+        <%}) %>
+    >
+        <% if(column.editor.options.searchable) { %>
+        <md-select-header>
+            <input ng-model="item.# column.name #_search" keydown-stop-propagation
+                   placeholder="{{'Search'|translate}}"
+                   class="form-control has-border-on-focus">
+        </md-select-header>
+        <% } %>
+        <md-option ng-repeat="# column.editor.options.repeatExpression # # column.editor.options.searchable ? '|filter:' + 'item.' + column.name + '_search' : '' #"
+                   ng-value="# column.editor.options.value #" >
+            <% if(column.editor.options.imageSrc) { %>
+            <div style="display: flex;align-items: center;" >
+                <img  ng-src="# column.editor.options.imageSrc #"
+                      style="width: 45px;height: 45px;"
+                      preload-image
+                      default-image="/public/images/no_image.png"
+                      fallback-image="/public/images/no_image.png"/>
+                <span class="m-r">{{# column.editor.options.display #}}</span>
+            </div>
+            <% } else { %>
+            {{# column.editor.options.display #}}
+            <% } %>
+        </md-option>
+
+    </md-select>
+
+    <% } else if(column.editor && column.editor.element === 'combo') { %>
+    <ds-combobox name="# column.name #"
+                 ng-model="# column.ngModel #"
+                 input-class="has-border-on-focus"
+                 on-input-focus="setCurrent(item,'# column.name #')"
+
+    <% Object.keys(column.editor).forEach(function(key) { %>
+    # key #="# column.editor[key] #"
+    <% }) %>
+
+    ></ds-combobox>
+
+    <% } else if(column.editor && column.editor.element === 'switch') { %>
+
+    <md-switch name="# column.name #"
+                 ng-model="# column.ngModel #"
+                 class="no-margins"
+
+    <% Object.keys(column.editor).forEach(function(key) { %>
+    # key #="# column.editor[key] #"
+    <% }) %>
+
+    ></md-switch>
+    <% } else if(column.editor && column.editor.element === 'custom') { %>
+        # column.editor.template #
+
+        <% if(column.editor.template_validators && column.editor.template_validators.length > 0) { %>
+        <% column.editor.template_validators.forEach(function(input, i) { %>
+        <script type="text/ng-template" id="# input.name #_validator_template">
+            <div ng-messages="form['form-'+ $index].# input.name #.$error"
+                 ng-if="form['form-'+ $index].# input.name #.$dirty">
+
+                <% input.validators.forEach(function(validator) { %>
+                <div ng-message="# validator.name #">
+                    {{'# validator.message #'|translate}}
+                </div>
+                <% }) %>
+            </div>
+        </script>
+        <% }) %>
+        <% } %>
+
+
+    <% } else { %>
+    {{# column.ngModel #}}
+    <% } %>
+
+    <% if(column.editor && column.editor.element !== 'custom') { %>
+    <script type="text/ng-template" id="# column.name #_validator_template">
+        <div ng-messages="form['form-'+ $index].# column.name #.$error"
+             ng-if="form['form-'+ $index].# column.name #.$dirty">
+
+            <% column.editor.validators.forEach(function(validator) { %>
+            <div ng-message="# validator.name #">
+                {{'# validator.message #'|translate}}
+            </div>
+            <% }) %>
+        </div>
+    </script>
+    <% } %>
+</td>
+<% }) %>
+
+<td ng-if="local_removable">
+    <button tabindex="-1"
+            style="margin-left: 5px"
+            type="button"
+            ng-click="removeItem(item)"
+            class="close"
+            uib-tooltip="{{'Remove'| translate}}">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</td>
+</tr>
+<% if(itemDetail !== 'none') { %>
+<tr ng-repeat-end
+
+    <% if(itemDetail.if) { %>
+    ng-if="#itemDetail.if#"
+    <% } %>
+
+    ng-show="item === current"
+    ng-click="setCurrent(item)"
+    ng-keyup="keyup($event, item)"
+    id="{{item.id}}-detail"
+    ng-form
+    name="form-{{$index}}-detail"
+    ng-class="{'dataTable-tr-select': item === current }">
+    <td colspan="# columns.length + (removable ? 1 : 0) #"
+
+    <% Object.keys(itemDetail.attrs).forEach(function(key) { %>
+    # key #="# itemDetail.attrs[key] #"
+    <% }) %>
+
+    >
+
+    # itemDetail.template #
+
+    <% itemDetail.validators.forEach(function(input){ %>
+    <script type="text/ng-template" id="# input.name #_validator_template">
+        <div ng-messages="form['form-'+ $index].# input.name #.$error"
+             ng-if="form['form-'+ $index].# input.name #.$dirty">
+
+            <% input.validators.forEach(function(validator) { %>
+            <div ng-message="# validator.name #">
+                {{'# validator.message #'|translate}}
+            </div>
+            <% }) %>
+        </div>
+    </script>
+    <% }) %>
+
+    </td>
+</tr>
+<% } %>

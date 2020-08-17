@@ -1,0 +1,17 @@
+<tr class="text-bold text-muted">
+    <% columns.forEach(function(column, i) { %>
+    <th class="p-r text-# column.header_align || column.align # # (column.editor || {}).required ? 'required' : '' #"
+
+        # column.ngIf ? 'ng-if="' + column.ngIf + '"' : '' #
+
+        <% if(column.width) { %>
+        style="width: # column.width #"
+        <% } %>
+    >
+        # column.header_template ? column.header_template : column.label #
+    </th>
+
+    <% }) %>
+
+    <th style="width: 30px" ng-if="local_removable"></th>
+</tr>

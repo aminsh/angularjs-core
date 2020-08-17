@@ -1,0 +1,22 @@
+<div class="table-responsive ds-dataTable-box" >
+    <div>
+        <md-button ng-if="local_addable" aria-label="add item" class="md-raised" style="min-width: unset;margin-left: 0;"
+                   ng-click="addItem()" uib-tooltip="{{'(Insert) Create new row'|translate}}">
+            <md-icon md-svg-src="md-add"></md-icon>
+        </md-button >
+
+        <span ng-transclude="toolbar"></span>
+    </div>
+    <table class="table ds-dataTable m-t" ng-class="{'table-bordered': bordered}" >
+        <thead ng-show="local_showHeader">
+
+        </thead>
+
+        <tbody ng-transclude="body"></tbody>
+
+        <tfoot ng-transclude="footer">
+
+        </tfoot>
+    </table>
+</div>
+

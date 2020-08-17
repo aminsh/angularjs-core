@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <title>AngularExample</title>
+    <base href="/">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/lib/dashboard.min.css" rel="stylesheet" />
+    <link href="/node_modules/angular-material/angular-material.min.css" rel="stylesheet" />
+    <!-- <link href="/lib/dscore.min.css" rel="stylesheet" /> -->
+
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+
+</head>
+
+<body class="align" dir="rtl">
+    <!-- <div ng-controller="ctrl as model">
+        <ds-datatable name="people" flex items="model.people" form="form" addable="false" removable="false"
+            selectable="true" model="model">
+            <ds-datatable-body>
+                <column align="center" header="Code"  width="10%"model="item.code" ></column>
+                <column align="center" header="Title" width="10%" model="item.title"></column>
+                <column align="center" header="Mobile" width="10%" model="item.mobile"></column>
+                <column header="{{'Person'|translate}}" width="40%" model="item.personId" name="personId">
+                    <column-editor editor="combo"
+                                   option="{oDataQuery: model.peopleDataQuery}"
+                                   display-expression="# item.code # # item.title #"
+                                   filter-expression="contains(concat(concat(code, ' '), title), '# search #')"
+                                   on-item-changed="onCreditPersonChanged($item)"
+                                   value-field="id"
+                                   display-field="display"
+                                   required
+                                   name="personId"
+                                   md-menu-large></column-editor>
+                </column>
+            </ds-datatable-body>
+
+        </ds-datatable>
+
+        <form>
+            <md-input-container class="md-block" flex flex-gt-xs="45">
+                <label>{{'Number' | translate}}</label>
+                <input ng-model="model.invoice.number" name="number" required></ds-numeric>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex flex-gt-xs="45">
+                <label class="ds-datepicker-label">{{'Date'|translate}}</label>
+                <ds-datepicker name="date" ng-model="model.dto.date"></ds-datepicker>
+            </md-input-container>
+        </form>
+
+    </div> -->
+
+    <div ng-controller="ctrl">
+        <h1>{{title}}</h1>
+    </div>
+</body>
+
+</html>
+
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+<script src="/node_modules/moment/min/moment.min.js"></script>
+<script src="/node_modules/moment-jalaali/build/moment-jalaali.js"></script>
+<script src="/node_modules/angular/angular.js"></script>
+<script src="/node_modules/angular-animate/angular-animate.js"></script>
+<script src="/node_modules/angular-aria/angular-aria.js"></script>
+<script src="/node_modules/angular-material/angular-material.min.js"></script>
+<script src="/node_modules/angular-material-persian-datepicker/dist/datePicker.min.js"></script>
+<script src="/dist/storm.ui-core.js"></script>
+<script src="./index.js"></script>
+
+<script>
+    // angular.module('app', ['ds-core'])
+    //     .run($rootScope => {
+    //         $rootScope.branch = { token: 'hBnNlhAolJun3xmMg5Bvu6OMAj7cI0kOIxgbHnPl8Qp' }
+    //     })
+    //     .constant('Environment', {
+    //         "ROOT_URL": "http://localhost:2001/v2"
+    //     })
+    //     .controller('ctrl', function ($scope, dataService) {
+    //         dataService.from('People').take(30).execute()
+    //             .then(result => {
+    //                 this.people = result.value;
+    //             });
+
+    //             this.peopleDataQuery = dataService.from('People');
+    //     })
+</script>

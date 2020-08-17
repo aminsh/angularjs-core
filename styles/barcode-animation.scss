@@ -1,0 +1,113 @@
+$duration: 2s;
+
+@function randpercent($from, $to) {
+  @return (random($to - $from) + $from - 1%);
+}
+
+.barcode {
+  position: relative;
+
+  & > div {
+    background-color: #444444;
+    float: left;
+    margin-right: 2px;
+    transform-origin: 0 0;
+  }
+
+  div:nth-child(1),
+  div:nth-child(2),
+  div:nth-child(3),
+  div:nth-child(8),
+  div:nth-child(9) {
+    height: 15px;
+  }
+
+  div:nth-child(1),
+  div:nth-child(9) {
+    width: 4px;
+  }
+
+  div:nth-child(2),
+  div:nth-child(3),
+  div:nth-child(5),
+  div:nth-child(8) {
+    width: 2px;
+  }
+
+  div:nth-child(4),
+  div:nth-child(5),
+  div:nth-child(6),
+  div:nth-child(7) {
+    height: 12px;
+  }
+
+  div:nth-child(3) {
+    margin-right: 4px;
+  }
+
+  div:nth-child(4) {
+    width: 6px;
+  }
+
+  div:nth-child(6) {
+    width: 2px;
+  }
+
+  div:nth-child(7) {
+    width: 1px;
+  }
+
+  div:nth-child(9) {
+    margin-right: 0;
+  }
+
+}
+
+@keyframes flicker {
+  0%, 20%, 40%, 60%, 80%, 100% {
+    opacity: 0;
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    opacity: 1;
+  }
+}
+
+@for $i from 1 through 9 {
+  $grow-start: randpercent(1%, 30%);
+  $grow-end: randpercent(35%, 65%);
+  $fade-start: randpercent(75%, 85%);
+  $fade-end: randpercent(88%, 98%);
+
+  @keyframes bar-#{$i} {
+    0%, #{$grow-start} {
+      transform: scaleY(0);
+    }
+
+    #{$grow-end} {
+      transform: scaleY(1);
+    }
+
+    #{$fade-start} {
+      opacity: 1;
+    }
+
+    #{$fade-end} {
+      opacity: 0;
+    }
+
+    99.5% {
+      transform: scaleY(1);
+      opacity: 0;
+    }
+
+    100% {
+      transform: scaleY(0);
+      opacity: 0;
+    }
+  }
+
+  .barcode > div:nth-child(#{$i}) {
+    animation: bar-#{$i} $duration ease-out infinite forwards;
+  }
+}
