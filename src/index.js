@@ -7,7 +7,7 @@ import 'angular-dynamic-number';
 import _ from 'lodash';
 import { dsDataTable } from './datatable';
 import { datepicker, combobox, dsNumber, blurEnter, fileViewer, fileUploader } from './controls';
-import { HttpRequest, Promise, Translate, DataService } from './services';
+import { HttpRequest, Promise, DataService, DialogService, Translate } from './services';
 
 _.templateSettings.interpolate = /#([\s\S]+?)#/g;
 
@@ -35,8 +35,10 @@ angular.module('ds-core', [ 'ngMaterial', 'angular-material-persian-datepicker',
     .service('httpRequest', HttpRequest)
     .service('promise', Promise)
     .service('dataService', DataService)
+    .service('dsDialog', DialogService)
     .factory('translate', Translate)
 ;
 
 export const CoreModule = 'ds-core';
 export * from './utils';
+export { DsDialog, registerDialog, DialogProvider } from './services';
