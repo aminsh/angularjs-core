@@ -56,12 +56,9 @@ testem.log
 /database/convert/data.json
 /.vscode
 
-/**/node_modules
-/**/dist
-/**/lib
-
-/Dashboard/server/dist
-/Dashboard/public
+**/node_modules
+**/dist
+**/lib
 
 # Others
 package-lock.json

@@ -30,6 +30,7 @@
     <% } else if(column.editor && column.editor.element === 'number') { %>
     <input  name="# column.name #"
             awnum="default"
+            autocomplete="off"
             ng-model="# column.ngModel #"
             md-select-on-focus
             class="form-control has-border-on-focus no-margins"

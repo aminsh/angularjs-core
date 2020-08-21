@@ -1,6 +1,6 @@
 {
   "name": "storm-ui-core",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "",
   "types": "types/index.d.ts",
   "module": "index.js",
@@ -36,6 +36,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
+    "@babel/plugin-transform-block-scoping": "^7.11.1",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
     "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
