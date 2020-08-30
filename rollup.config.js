@@ -14,7 +14,7 @@ export default {
     plugins: [
         commonjs(),
         nodeResolve(),
-        babel({ babelHelpers: 'bundled' })
+        babel()
     ],
     external
 };
