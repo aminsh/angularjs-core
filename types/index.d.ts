@@ -1,3 +1,3 @@
 export * from './services';
-export * from './env';
-export declare const CoreModule;
+export * from './providers';
+export declare class CoreModule {}
