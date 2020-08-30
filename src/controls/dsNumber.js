@@ -1,3 +1,4 @@
+/* @ngInject */
 export function dsNumber() {
     return {
         restrict: 'E',
@@ -6,6 +7,7 @@ export function dsNumber() {
     }
 }
 
+/* @ngInject */
 export function blurEnter($window) {
     return {
         restrict: 'A',

@@ -1,3 +1,4 @@
+/* @ngInject */
 export function fileViewer() {
     return {
         restrict: 'E',

@@ -1,4 +1,5 @@
 export class Promise {
+    /* @ngInject */
     constructor($q) {
         this.$q = $q;
     }

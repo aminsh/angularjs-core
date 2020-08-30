@@ -1,4 +1,5 @@
 export class DialogService {
+    /* @ngInject */
     constructor($mdDialog, $rootScope, promise) {
         this.$mdDialog = $mdDialog;
         this.$rootScope = $rootScope;

@@ -1,4 +1,5 @@
 export class HttpRequest {
+    /* @ngInject */
     constructor($http, $q, $rootScope, $cookies, promise, translate, environment) {
         this.$http = $http;
         this.$q = $q;

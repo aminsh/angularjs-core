@@ -1,3 +1,4 @@
+/* @ngInject */
 export function datepicker() {
     return {
         require: 'ngModel',

@@ -1,6 +1,7 @@
 import { Guid } from '../utils/string';
 import * as _ from 'lodash';
 
+/* @ngInject */
 export function combobox(httpRequest, promise, $timeout, $window) {
     return {
         restrict: 'E',

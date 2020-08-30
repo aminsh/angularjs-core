@@ -4,6 +4,7 @@ import { keyboard, getName as keyboardGetName } from "../utils/keyboard";
 import { template } from "lodash";
 import { itemDetailParser } from "./itemDetailParser";
 
+/* @ngInject */
 export function dsDataTable($compile, $rootScope, $templateCache) {
     return {
         restrict: 'E',

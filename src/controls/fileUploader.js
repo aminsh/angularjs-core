@@ -1,5 +1,6 @@
 import Dropzone from 'dropzone';
 
+/* @ngInject */
 export function fileUploader(translate, environment) {
     return {
         restrict: 'E',

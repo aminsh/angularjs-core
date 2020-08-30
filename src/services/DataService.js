@@ -1,6 +1,7 @@
 import { ODataQueryBuilder } from '../utils';
 
 export class DataService {
+    /* @ngInject */
     constructor(promise, httpRequest, environment) {
         this.promise = promise;
         this.httpRequest = httpRequest;
