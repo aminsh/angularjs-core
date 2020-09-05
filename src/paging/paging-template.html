@@ -1,0 +1,56 @@
+<div layout="row" layout-align="start center" style="height: 45px">
+    <span style="font-size: 12px" uib-tooltip="{{'Total items'|translate}}">{{total}}</span>
+
+
+    <div flex></div>
+
+    <div layout="row" layout-align="space-around center">
+        <md-button class="md-icon-button m-l-lg"
+                   uib-tooltip="{{'Refresh'|translate}}"
+                   ng-click="change()">
+            <md-icon md-svg-src="md-refresh" aria-label="refresh paging"></md-icon>
+        </md-button>
+
+        <span class="m-l-sm m-r-lg" style="font-size: 12px">{{'Items per page'|translate}} : </span>
+        <md-select ng-model="pageSize" required name="pageSize" class="m-l-lg">
+            <md-option ng-repeat="ps in pageSizes"
+                       ng-value="ps"
+                       name="pageSize-item">
+                {{ps}}
+            </md-option>
+        </md-select>
+
+        <span class="mr30 ml30" style="font-size: 12px">
+            {{currentPage}} {{'Of'|translate}} {{totalPages}}
+        </span>
+
+        <md-button class="md-icon-button"
+                   ng-disabled="currentPage === 1"
+                   uib-tooltip="{{'First'|translate}}"
+                   ng-click="first()">
+            <md-icon md-svg-src="md-last-page" aria-label="previous paging"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button"
+                   ng-disabled="currentPage === 1"
+                   uib-tooltip="{{'Previous'|translate}}"
+                   ng-click="previous()">
+            <md-icon md-svg-src="md-right" aria-label="previous paging"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button"
+                   ng-disabled="currentPage === totalPages"
+                   uib-tooltip="{{'Next'|translate}}"
+                   ng-click="next()">
+            <md-icon md-svg-src="md-left" aria-label="next paging"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button"
+                   ng-disabled="currentPage === totalPages"
+                   uib-tooltip="{{'Last'|translate}}"
+                   ng-click="last()">
+            <md-icon md-svg-src="md-first-page" aria-label="last paging"></md-icon>
+        </md-button>
+    </div>
+</div>
+

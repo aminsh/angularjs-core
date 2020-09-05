@@ -49,3 +49,16 @@ function findNext(elem) {
 
     }
 }
+
+/* @ngInject */
+export function dsNumberConfig (dynamicNumberStrategyProvider) {
+    dynamicNumberStrategyProvider.addStrategy('default', {
+        numInt: 100,
+        numFract: 2,
+        numSep: '.',
+        numPos: true,
+        numNeg: true,
+        numRound: 'round',
+        numThousand: true
+    });
+}
