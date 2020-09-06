@@ -1,9 +1,10 @@
 export class DialogService {
     /* @ngInject */
-    constructor($mdDialog, $rootScope, promise) {
+    constructor($mdDialog, $state, $transitions, promise) {
         this.$mdDialog = $mdDialog;
-        this.$rootScope = $rootScope;
         this.promise = promise;
+        this.$state = $state;
+        this.$transitions = $transitions;
     }
 
     createForRoute(options) {
@@ -11,7 +12,7 @@ export class DialogService {
             .show({
                 controller: options.controller,
                 controllerAs: options.controllerAs,
-                templateUrl: options.templateUrl,
+                template: options.template,
                 parent: angular.element(document.body),
                 //targetEvent: ev,
                 //clickOutsideToClose: true,
@@ -24,8 +25,8 @@ export class DialogService {
                     if (!isOpen)
                         return;
 
-                    this.$rootScope.up();
-                    starter();
+                    this.$state.go('^');
+                    deregisterHook();
                 }
             })
             .then(() => {
@@ -36,17 +37,18 @@ export class DialogService {
         let isOpen = false,
             stateName;
 
-        let starter = this.$rootScope.$on('$stateChangeSuccess', (event, toState) => {
+        const deregisterHook = this.$transitions.onSuccess({}, trans => {
+            const current = trans.router.stateService.$current;
+
             if (!isOpen) {
                 isOpen = true;
-                stateName = toState.name;
-            } else if (isOpen && toState.name !== stateName) {
+                stateName = current.name;
+            } else if (isOpen && current.name !== stateName) {
                 this.$mdDialog.hide();
                 isOpen = false;
-                starter();
+                deregisterHook();
             }
         });
-
     }
 
     hide(params) {

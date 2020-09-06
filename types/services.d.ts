@@ -25,19 +25,25 @@ export declare function DsDialog(options: IDialogOptions): (ctrl: Constructor) =
 export declare function registerDialog(ctrl: Constructor): { provide: string, useFactory: Function, deps?: any[] }
 
 export interface IDialogService {
-    createForRoute(options: IDialogOptions): void
+    createForRoute(options: IRouteDialogOptions): void
 
     hide(parameters: any): void;
 
     cancel(): void;
 }
 
-export interface IShowDialog<TRequest,TResponse> {
+export interface IShowDialog<TRequest, TResponse> {
     show(parameters: TRequest): Promise<TResponse>;
 }
 
 export interface IDialogOptions {
     provide?: string;
+    controllerAs?: string;
+    template: string;
+}
+
+export interface IRouteDialogOptions {
+    controller: string | Constructor;
     controllerAs?: string;
     template: string;
     resolve?: object;
