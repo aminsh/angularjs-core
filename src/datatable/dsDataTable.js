@@ -105,6 +105,9 @@ export function dsDataTable($compile, $rootScope, $templateCache) {
                 scope.addItem = () => {
                     let item = {};
 
+                    if (!scope.items)
+                        scope.items = [ {} ];
+
                     scope.items.push(item);
 
                     scope.onItemCreated({ $item: item });

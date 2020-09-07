@@ -24,7 +24,7 @@ export class HttpRequest {
                 .catch(error => {
                     let message = this.errorHandler(error);
                     console.log(error);
-                    reject(Array.isArray(message) ? message : [message]);
+                    reject(Array.isArray(message) ? message : [ message ]);
                 });
         });
     }
@@ -32,8 +32,7 @@ export class HttpRequest {
     onSuccessResponseHandler(result, resolve, reject) {
         if (result.isValid) {
             resolve(result.returnValue);
-        }
-        else {
+        } else {
             reject(result.errors)
         }
     }
@@ -45,7 +44,7 @@ export class HttpRequest {
         if (error.status === 401 && error.data === 'user is not authenticated')
             return $rootScope.$emit('onUserIsNotAuthenticated');
 
-        const inValidMessages = ['The branch is expired', 'No token provided.', 'The branch is not active', 'The branch does not have subscription'];
+        const inValidMessages = [ 'The branch is expired', 'No token provided.', 'The branch is not active', 'The branch does not have subscription' ];
 
         if (error.status === 403 && (inValidMessages.includes(error.data)))
             return $rootScope.$emit('onBranchIsInvalid');
@@ -119,13 +118,14 @@ export class HttpRequest {
                 .catch(function (error) {
                     this.errorHandler(error);
                     console.log(error);
-                    reject(['Internal Error']);
+                    reject([ 'Internal Error' ]);
                 });
         });
     }
 
     post(url, data, options) {
-        const $rootScope = this.$rootScope;
+        const $rootScope = this.$rootScope,
+            $http = this.$http;
         let headers = this.getHeaders(options);
         if ($rootScope.fiscalPeriodId && $rootScope.fiscalPeriodId.length > 1) {
             return this.promisify($http.post(url, data, {
@@ -138,8 +138,8 @@ export class HttpRequest {
     }
 
     put(url, data, options) {
-        const $rootScope = this.$rootScope;
-
+        const $rootScope = this.$rootScope,
+            $http = this.$http;
         let headers = this.getHeaders(options);
         if ($rootScope.fiscalPeriodId && $rootScope.fiscalPeriodId.length > 1) {
             return this.promisify($http.put(url, data, {
@@ -152,11 +152,14 @@ export class HttpRequest {
     }
 
     delete(url, options) {
-        const $rootScope = this.$rootScope;
-
+        const $rootScope = this.$rootScope,
+            $http = this.$http;
         let headers = this.getHeaders(options);
         if ($rootScope.fiscalPeriodId && $rootScope.fiscalPeriodId.length > 1) {
-            return this.promisify($http.delete(url, { headers, params: { fiscalPeriodId: $rootScope.fiscalPeriodId } }));
+            return this.promisify($http.delete(url, {
+                headers,
+                params: { fiscalPeriodId: $rootScope.fiscalPeriodId }
+            }));
         } else {
             return this.promisify($http.delete(url, { headers, params: {} }));
         }
