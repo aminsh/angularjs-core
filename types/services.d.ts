@@ -55,3 +55,23 @@ export declare enum DialogProvider {
     fromRoute = 'fromRoute'
 }
 
+export declare function Translate(key: string): string;
+
+export declare function IConfirmDialog(title:string , message:string): Promise<boolean>;
+
+export interface Logger {
+    alert(message : string) : void;
+    success(message : string) : void;
+    info(message : string) : void;
+    close() : void;
+    warning(message : string) : void;
+    error(message : string) : void;
+}
+
+export declare function Navigate(name: string,parameter: object,queryString:string):void;
+
+export interface IFormService {
+    setDirty(form : any) : void;
+    setClean(form : any) : void;
+    setDirtySubForm(form : any) : void;
+}

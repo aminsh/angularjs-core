@@ -1,3 +1,4 @@
+import moment from 'moment-jalaali'
 /* @ngInject */
 export function datepicker() {
     return {

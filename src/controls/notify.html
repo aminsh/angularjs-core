@@ -1,0 +1,17 @@
+<md-toast role="alert" aria-relevant="all" class="animated fadeInDown notifyClass">
+    <i class="fa fa-check-circle fa-2x text-navy m-l" ng-if="model.options.success"></i>
+    <span class="md-toast-text" flex>{{model.toastMessage}}</span>
+    <span class="md-visually-hidden">
+    Press Escape to dismiss. Press Control-"{{model.dialogKey}}" for
+  </span>
+
+    <md-button ng-if="model.options.show"
+               ng-click="model.show()">
+        {{'Show'|translate}}
+    </md-button>
+
+    <md-button class="md-icon-button" ng-click="model.close()">
+        <md-icon md-svg-src="md-close" aria-label="Close dialog"
+                 style="fill: rgba(255,255,255,0.87); color: rgba(255,255,255,0.87)"></md-icon>
+    </md-button>
+</md-toast>

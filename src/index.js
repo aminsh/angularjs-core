@@ -4,21 +4,40 @@ import 'angular-cookies';
 import 'angular-material-persian-datepicker';
 import 'angular-translate';
 import 'angular-dynamic-number';
+import 'angular-ui-router';
 import _ from 'lodash';
 import { dsDataTable } from './datatable';
-import { datepicker, combobox, dsNumber, dsNumberConfig, blurEnter, fileViewer, fileUploader } from './controls';
-import { HttpRequest, Promise, DataService, DialogService, Translate } from './services';
+import {
+    datepicker,
+    combobox,
+    dsNumber,
+    dsNumberConfig,
+    blurEnter,
+    fileViewer,
+    fileUploader,
+    NotifyService, NotifyController
+} from './controls';
+import {
+    HttpRequest,
+    Promise,
+    DataService,
+    DialogService,
+    Translate,
+    NavigateService,
+    Logger,
+    Confirm,
+    FormService
+} from './services';
 import { paging } from './paging';
 import { environmentProvider } from "./providers/environmentProvider";
 import { mdConfig } from "./configs/mdConfig";
 
 _.templateSettings.interpolate = /#([\s\S]+?)#/g;
 
-angular.module('ds-core', [ 'ngMaterial', 'angular-material-persian-datepicker', 'ngCookies', 'pascalprecht.translate', 'dynamicNumber' ])
+angular.module('ds-core', [ 'ngMaterial', 'angular-material-persian-datepicker', 'ngCookies', 'pascalprecht.translate', 'dynamicNumber','ui.router' ])
     .config(dsNumberConfig)
     .config(mdConfig)
     .directive('dsDatatable', dsDataTable)
-
     .directive('dsDatepicker', datepicker)
     .directive('dsCombobox', combobox)
     .directive('blueEnter', blurEnter)
@@ -27,12 +46,19 @@ angular.module('ds-core', [ 'ngMaterial', 'angular-material-persian-datepicker',
     .directive('dsFileUploader', fileUploader)
     .directive('dsPaging', paging)
 
+    .controller('notifyController', NotifyController)
+
+    .service('notify', NotifyService)
     .service('httpRequest', HttpRequest)
     .service('promise', Promise)
     .service('dataService', DataService)
     .service('dsDialog', DialogService)
-    .factory('translate', Translate)
+    .service('translate', Translate)
     .provider('environment', environmentProvider)
+    .service('formService', FormService)
+    .service('navigate', NavigateService)
+    .service('logger', Logger)
+    .service('confirm', Confirm)
 ;
 
 export const CoreModule = 'ds-core';

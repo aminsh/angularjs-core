@@ -26,13 +26,15 @@
     "angular-material": "^1.2.0",
     "angular-material-persian-datepicker": "^1.2.0",
     "angular-translate": "^2.18.3",
+    "angular-ui-router": "^1.0.28",
     "bootstrap-sass-directional": "^2.1.1",
     "dropzone": "^5.7.2",
     "jquery": "^3.5.1",
     "linq": "^3.2.2",
     "lodash": "^4.17.20",
     "moment": "^2.18.1",
-    "moment-jalaali": "^0.4.0"
+    "moment-jalaali": "^0.4.0",
+    "sweetalert": "^2.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
