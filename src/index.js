@@ -1,6 +1,7 @@
 import angular from 'angular';
 import 'angular-material';
 import 'angular-cookies';
+import 'moment-jalaali'
 import 'angular-material-persian-datepicker';
 import 'angular-translate';
 import 'angular-dynamic-number';
@@ -58,12 +59,12 @@ angular.module('ds-core', [ 'ngMaterial', 'angular-material-persian-datepicker',
     .service('promise', Promise)
     .service('dataService', DataService)
     .service('dsDialog', DialogService)
-    .service('translate', Translate)
+    .factory('translate', Translate)
     .provider('environment', environmentProvider)
     .service('formService', FormService)
-    .service('navigate', NavigateService)
+    .factory('navigate', NavigateService)
     .service('logger', Logger)
-    .service('confirm', Confirm)
+    .factory('confirm', Confirm)
 ;
 
 export const CoreModule = 'ds-core';
