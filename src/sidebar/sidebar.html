@@ -1,0 +1,72 @@
+<md-sidenav class="md-sidenav-right sidemenu"
+            id="main-side-nav"
+            md-component-id="sidebar"
+            md-whiteframe="4"  md-is-locked-open="isOpen ? $mdMedia('gt-sm') : '' " ><!--hide-gt-sm    style="width: 100%;" md-is-locked-open="$mdMedia('gt-sm')"-->
+
+    <md-content class="no-padding" style="height: calc(100vh - 63px);">
+        <ul id="md-side-menu" class="nav md-nav no-padding" style="display: none;">
+            <li>
+                <a ui-sref-active="active" ng-click="toggleMdSidebar()" ui-sref="home" title="{{'Home'|translate}}">
+                    <md-icon md-svg-src="md-home" ></md-icon>
+                    <span class="nav-label">{{'Home'|translate}}</span>
+                </a>
+            </li>
+
+            <li ng-repeat="item in localItems">
+                <a ng-if="!item.children.length"
+                   ng-class="{active: $state.current.name.includes(item.state) || hasChildren(item)}" ui-sref-active="active"
+                   ui-sref="{{item.state}}" title="{{item.label | translate}}">
+                    <md-icon md-svg-src="{{item.icon}}" ></md-icon>
+                    <span class="nav-label">{{item.label | translate}}</span>
+                    <span class="fa arrow" ng-if="item.children.length"></span>
+                </a>
+                <a ng-if="item.children.length" title="{{item.label | translate}}"
+                   ng-class="{active: $state.current.name.includes(item.state) || hasChildren(item)}">
+                    <md-icon md-svg-src="{{item.icon}}" ></md-icon>
+                    <span class="nav-label">{{item.label | translate}}</span>
+                    <span class="fa arrow" ng-if="item.children.length"></span>
+                </a>
+                <ul class="nav nav-second-level" ng-if="item.children.length">
+                    <li ng-repeat="firstLevelChild in item.children">
+                        <a ui-sref-active="active" ng-if="!firstLevelChild.children.length" ui-sref="{{firstLevelChild.state}}">
+                            {{firstLevelChild.label | translate}}
+                        </a>
+                        <a ui-sref-active="active" ng-if="firstLevelChild.children.length" >
+                            {{firstLevelChild.label | translate}}
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-third-level"  ng-if="firstLevelChild.children.length">
+                            <li ng-repeat="secondLevelChild in firstLevelChild.children">
+                                <a ui-sref-active="active" ui-sref="{{secondLevelChild.state}}">{{secondLevelChild.label | translate}}</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="special_link" ng-if="canShowMenu({})" >
+                <a ui-sref-active="active" ui-sref="thirdParty"
+                   title="{{ 'Third parties'|translate }}">
+                    <md-icon md-svg-src="md-Extension" ></md-icon>
+                    <span class="nav-label">{{ 'Third parties'|translate }}</span>
+                </a>
+            </li>
+
+            <li ng-if="installedThirdParties.length" >
+                <a title="{{ 'Installed third parties' | translate}}">
+                    <md-icon md-svg-src="md-installed-Extension" ></md-icon>
+                    <span class="nav-label">{{ 'Installed third parties' | translate}}</span>
+                    <span class="fa arrow" ng-if="installedThirdParties.length"></span>
+                </a>
+                <ul class="nav nav-second-level" ng-if="installedThirdParties.length">
+                    <li ng-repeat="thirdParty in installedThirdParties">
+                        <a ui-sref-active="active" ng-click="toggleMdSidebar()" ui-sref="{{thirdParty.url}}">{{thirdParty.title}}</a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+
+    </md-content>
+</md-sidenav>

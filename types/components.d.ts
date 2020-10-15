@@ -10,3 +10,11 @@ export interface IPage {
     skip?: number;
     take?: number
 }
+
+export interface ISideMenuItem {
+    label?: string;
+    state?: string;
+    mdIcon?: string;
+    underDevelop?: boolean;
+    children?: Array<ISideMenuItem>
+}

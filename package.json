@@ -34,7 +34,8 @@
     "lodash": "^4.17.20",
     "moment": "^2.18.1",
     "moment-jalaali": "^0.4.0",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "metismenu": "^2.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
