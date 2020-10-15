@@ -4,9 +4,10 @@ import 'angular-cookies';
 import 'angular-material-persian-datepicker';
 import 'angular-translate';
 import 'angular-dynamic-number';
-import 'angular-ui-router';
 import _ from 'lodash';
 import { dsDataTable } from './datatable';
+import { sidebar } from "./sidebar/sidebar";
+import { preImageLoader, list, listItem } from "./widget";
 import {
     datepicker,
     combobox,
@@ -34,9 +35,10 @@ import { mdConfig } from "./configs/mdConfig";
 
 _.templateSettings.interpolate = /#([\s\S]+?)#/g;
 
-angular.module('ds-core', [ 'ngMaterial', 'angular-material-persian-datepicker', 'ngCookies', 'pascalprecht.translate', 'dynamicNumber','ui.router' ])
+angular.module('ds-core', [ 'ngMaterial', 'angular-material-persian-datepicker', 'ngCookies', 'pascalprecht.translate', 'dynamicNumber', 'ui.router' ])
     .config(dsNumberConfig)
     .config(mdConfig)
+    .directive('dsSidebar', sidebar)
     .directive('dsDatatable', dsDataTable)
     .directive('dsDatepicker', datepicker)
     .directive('dsCombobox', combobox)
@@ -45,6 +47,9 @@ angular.module('ds-core', [ 'ngMaterial', 'angular-material-persian-datepicker',
     .directive('dsFileViewer', fileViewer)
     .directive('dsFileUploader', fileUploader)
     .directive('dsPaging', paging)
+    .directive('dsPreImageLoader', preImageLoader)
+    .directive('dsList', list)
+    .directive('dsListItem', listItem)
 
     .controller('notifyController', NotifyController)
 
