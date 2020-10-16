@@ -10,7 +10,7 @@ export function sidebar($rootScope, $state, $timeout, $mdSidenav, environment) {
             require('metismenu');
             scope.localItems = scope.items.filter(item => environment.env === 'development' ? true : !item.underDevelop);
 
-            scope.hasChildren = (item) => {
+            scope.hasChildren = item => {
                 if (item.children) {
                     return item.children.some(item => {
                         return $state.current.name === item.state || $state.current.name.includes(item.state);
