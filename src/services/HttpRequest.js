@@ -17,23 +17,27 @@ export class HttpRequest {
     }
 
     errorHandler(error, reject) {
+        let exception;
         switch (error.status) {
             case 400:
-                reject(new BadRequestException(error.data, error));
+                exception = new BadRequestException(error.data, error);
                 break;
             case 401:
-                reject(new UnauthorizedException(error));
+                exception = new UnauthorizedException(error);
                 break;
             case 403:
-                reject(new ForbiddenException(error));
+                exception = new ForbiddenException(error);
                 break;
             case 404:
-                reject(new NotFoundException(error));
+                exception = new NotFoundException(error);
                 break;
             default:
-                reject(error);
+                exception = new Error(error);
                 break;
         }
+
+        reject(exception);
+        this.$rootScope.$emit('error', exception);
     }
 
     get(url, data, options) {
