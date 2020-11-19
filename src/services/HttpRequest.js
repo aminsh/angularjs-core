@@ -59,7 +59,7 @@ export class HttpRequest {
     post(url, data, options) {
         options = options || {};
         return this.promise.create((resolve, reject) => {
-            $http.post(url, data, { headers: options.headers, params: options.query })
+            this.$http.post(url, data, { headers: options.headers, params: options.query })
                 .then(result => resolve(result.data))
                 .catch(error => this.errorHandler(error, reject));
         });
@@ -68,7 +68,7 @@ export class HttpRequest {
     put(url, data, options) {
         options = options || {};
         return this.promise.create((resolve, reject) => {
-            $http.put(url, data, { headers: options.headers, params: options.query })
+            this.$http.put(url, data, { headers: options.headers, params: options.query })
                 .then(result => resolve(result.data))
                 .catch(error => this.errorHandler(error, reject));
         });
@@ -77,7 +77,7 @@ export class HttpRequest {
     delete(url, options) {
         options = options || {};
         return this.promise.create((resolve, reject) => {
-            $http.delete(url, { headers: options.headers, params: options.query })
+            this.$http.delete(url, { headers: options.headers, params: options.query })
                 .then(result => resolve(result.data))
                 .catch(error => this.errorHandler(error, reject));
         });
