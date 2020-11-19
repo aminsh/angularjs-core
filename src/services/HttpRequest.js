@@ -37,6 +37,7 @@ export class HttpRequest {
     }
 
     get(url, data, options) {
+        options = options || {};
         const params = { ...options.query, ...data };
         const headers = { ...this.defaultHeaders, ...options.headers };
 
@@ -52,6 +53,7 @@ export class HttpRequest {
     }
 
     post(url, data, options) {
+        options = options || {};
         return this.promise.create((resolve, reject) => {
             $http.post(url, data, { headers: options.headers, params: options.query })
                 .then(result => resolve(result.data))
@@ -60,6 +62,7 @@ export class HttpRequest {
     }
 
     put(url, data, options) {
+        options = options || {};
         return this.promise.create((resolve, reject) => {
             $http.put(url, data, { headers: options.headers, params: options.query })
                 .then(result => resolve(result.data))
@@ -68,6 +71,7 @@ export class HttpRequest {
     }
 
     delete(url, options) {
+        options = options || {};
         return this.promise.create((resolve, reject) => {
             $http.delete(url, { headers: options.headers, params: options.query })
                 .then(result => resolve(result.data))
