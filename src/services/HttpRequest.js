@@ -10,10 +10,27 @@ export class HttpRequest {
         this.promise = promise;
         this.translate = translate;
         this.environment = environment;
-        this.defaultHeaders = {
-            "Cache-Control": "no-cache"
-        };
-        this.defaultQuery = {}
+    }
+
+    getDefaultHeaders(options) {
+        const headers = {
+                "Cache-Control": "no-cache",
+                "x-access-token": this.environment.TENANT_KEY
+            },
+            useDefault = options.hasOwnProperty('useDefault') ? options.useDefault : true;
+        return useDefault
+            ? { ...headers, ...options.headers }
+            : options.headers;
+    }
+
+    getDefaultQuery(options) {
+        const query = {
+                fiscalPeriodId: this.environment.FISCAL_PERIOD
+            },
+            useDefault = options.hasOwnProperty('useDefault') ? options.useDefault : true;
+        return useDefault
+            ? { ...query, ...options.query }
+            : options.query;
     }
 
     errorHandler(error, reject) {
@@ -42,11 +59,13 @@ export class HttpRequest {
 
     get(url, data, options) {
         options = options || {};
-        const params = { ...options.query, ...data };
-        const headers = { ...this.defaultHeaders, ...options.headers };
-
+        const params = { ...this.getDefaultQuery(options), ...data };
         return this.promise.create((resolve, reject) => {
-            this.$http.get(url, { params, paramSerializer: '$httpParamSerializerJQLike', headers })
+            this.$http.get(url, {
+                params,
+                paramSerializer: '$httpParamSerializerJQLike',
+                headers: this.getDefaultHeaders(options)
+            })
                 .then(result => {
                     resolve(result.data);
                 })
@@ -59,7 +78,10 @@ export class HttpRequest {
     post(url, data, options) {
         options = options || {};
         return this.promise.create((resolve, reject) => {
-            this.$http.post(url, data, { headers: options.headers, params: options.query })
+            this.$http.post(url, data, {
+                headers: this.getDefaultHeaders(options),
+                params: this.getDefaultQuery(options)
+            })
                 .then(result => resolve(result.data))
                 .catch(error => this.errorHandler(error, reject));
         });
@@ -68,7 +90,10 @@ export class HttpRequest {
     put(url, data, options) {
         options = options || {};
         return this.promise.create((resolve, reject) => {
-            this.$http.put(url, data, { headers: options.headers, params: options.query })
+            this.$http.put(url, data, {
+                headers: this.getDefaultHeaders(options),
+                params: this.getDefaultQuery(options)
+            })
                 .then(result => resolve(result.data))
                 .catch(error => this.errorHandler(error, reject));
         });
@@ -77,7 +102,7 @@ export class HttpRequest {
     delete(url, options) {
         options = options || {};
         return this.promise.create((resolve, reject) => {
-            this.$http.delete(url, { headers: options.headers, params: options.query })
+            this.$http.delete(url, { headers: this.getDefaultHeaders(options), params: this.getDefaultQuery(options) })
                 .then(result => resolve(result.data))
                 .catch(error => this.errorHandler(error, reject));
         });

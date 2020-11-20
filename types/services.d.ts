@@ -10,22 +10,36 @@ export interface IDataService {
 
 export interface IODataQueryBuilder<TResponse> {
     find(id: string): Promise<TResponse>;
+
     single(): Promise<TResponse>;
+
     firstOrDefault(field: string, operator: string, value: any, defaultValue?: any): Promise<TResponse>;
+
     include(association): IODataQueryBuilder<TResponse>;
+
     where(field: string, operator: string, value: any): IODataQueryBuilder<TResponse>;
+
     whereRaw(whereClause: string): IODataQueryBuilder<TResponse>;
+
     orderBy(field: string): IODataQueryBuilder<TResponse>;
+
     orderByDescending(field: string): IODataQueryBuilder<TResponse>;
+
     take(number: number): IODataQueryBuilder<TResponse>;
+
     skip(number: number): IODataQueryBuilder<TResponse>;
+
     useInlineCount(): IODataQueryBuilder<TResponse>;
+
     setQueryString(qs: string): IODataQueryBuilder<TResponse>;
+
     executeAsKendo(parameters: any): Promise<IKendoResponse<TResponse>>;
+
     execute(): Promise<IODataResponse<TResponse>>
 }
 
-export interface IODataResponse<TResponse> {    value: TResponse[];
+export interface IODataResponse<TResponse> {
+    value: TResponse[];
     ['@odata.count']: number
 }
 
@@ -36,14 +50,18 @@ export interface IKendoResponse<TResponse> {
 
 export interface IHttpRequest {
     get<TResponse>(url: string, data: any, options?: IHttpRequestOptions): Promise<TResponse>;
+
     post<TResponse>(url: string, data: any, options?: IHttpRequestOptions): Promise<TResponse>;
+
     put<TResponse>(url: string, data: any, options?: IHttpRequestOptions): Promise<TResponse>;
+
     delete<TResponse>(url: string, options?: IHttpRequestOptions): Promise<TResponse>;
 }
 
 export interface IHttpRequestOptions {
     headers?: IDictionary<string>;
-    query?: IDictionary<string>,
+    query?: IDictionary<string>;
+    useDefault?: boolean;
 }
 
 /**
@@ -55,7 +73,9 @@ export declare function registerDialog(ctrl: Constructor): { provide: string, us
 
 export interface IDialogService {
     createForRoute(options: IRouteDialogOptions): void
+
     hide(parameters: any): void;
+
     cancel(): void;
 }
 
