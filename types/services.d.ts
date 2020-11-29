@@ -49,11 +49,11 @@ export interface IKendoResponse<TResponse> {
 }
 
 export interface IHttpRequest {
-    get<TResponse>(url: string, data: any, options?: IHttpRequestOptions): Promise<TResponse>;
+    get<TResponse>(url: string, data?: any, options?: IHttpRequestOptions): Promise<TResponse>;
 
-    post<TResponse>(url: string, data: any, options?: IHttpRequestOptions): Promise<TResponse>;
+    post<TResponse>(url: string, data?: any, options?: IHttpRequestOptions): Promise<TResponse>;
 
-    put<TResponse>(url: string, data: any, options?: IHttpRequestOptions): Promise<TResponse>;
+    put<TResponse>(url: string, data?: any, options?: IHttpRequestOptions): Promise<TResponse>;
 
     delete<TResponse>(url: string, options?: IHttpRequestOptions): Promise<TResponse>;
 }
@@ -74,7 +74,7 @@ export declare function registerDialog(ctrl: Constructor): { provide: string, us
 export interface IDialogService {
     createForRoute(options: IRouteDialogOptions): void
 
-    hide(parameters: any): void;
+    hide(parameters?: any): void;
 
     cancel(): void;
 }

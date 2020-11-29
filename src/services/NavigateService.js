@@ -1,3 +1,4 @@
+/* @ngInject */
 export function NavigateService($state, $location) {
     let navigate = (name, parameters, queryString) => {
 
