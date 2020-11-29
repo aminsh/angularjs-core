@@ -1,10 +1,10 @@
+/* @ngInject */
 export function Confirm(translate, $mdDialog, promise) {
-
-    return (title, message) => {
+    return (params) => {
         return promise.create((resolve) => {
             let confirm = $mdDialog.confirm()
-                .title(title)
-                .textContent(message)
+                .title(translate(params.title))
+                .textContent(translate(params.message))
                 .ariaLabel('Confirm')
                 .ok(translate('Yes'))
                 .cancel(translate('No'))
