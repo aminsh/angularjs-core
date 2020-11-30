@@ -18,7 +18,7 @@ export function fileUploader(translate, environment) {
             const defaultAcceptedFiles = 'image/*,application/pdf,.xlsx,docx';
             let maxFileSize = parseInt(attrs.maxFileSize);
 
-            if(!(maxFileSize && !isNaN(maxFileSize)))
+            if (!(maxFileSize && !isNaN(maxFileSize)))
                 maxFileSize = 2;
 
             let config = {
@@ -29,17 +29,18 @@ export function fileUploader(translate, environment) {
                     clickable: '#upload',
                     addRemoveLinks: true,
                     dictRemoveFile: translate('remove'),
+                    headers: { Authorization: environment.USER_KEY }
                 },
                 dropzone = new Dropzone(element[0], config);
 
             dropzone.on('success', function (file, response) {
-                scope.uploaded({fileName: response.fullName, originalFileName: response.originalName});
+                scope.uploaded({ fileName: response.fullName, originalFileName: response.originalName });
                 scope.$apply();
             });
 
-            if(scope.isSingular) {
-                dropzone.on("addedfile", function() {
-                    if (dropzone.files[1]!=null){
+            if (scope.isSingular) {
+                dropzone.on("addedfile", function () {
+                    if (dropzone.files[1] != null) {
                         dropzone.removeFile(this.files[0]);
                     }
                 });
@@ -49,7 +50,7 @@ export function fileUploader(translate, environment) {
                 console.log(error);
             });
 
-            if(scope.uploaderAction)
+            if (scope.uploaderAction)
                 scope.uploaderAction.removeAllFiles = () => dropzone.removeAllFiles();
         }
     };

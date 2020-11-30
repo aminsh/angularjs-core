@@ -12,7 +12,7 @@
              ng-repeat="file in files">
             <div class="uploaderPreview">
                 <div ng-if="file.category === 'image'"><a href="/{{file.name}}" data-gallery=""> <img
-                        src="/{{file.name}}" preload-image> </a></div>
+                        src="{{file.name}}" preload-image> </a></div>
                 <div ng-if="file.category !== 'image'"><a href="/{{file.name}}" target="_blank"><i
                         class="fa fa-file"></i></a></div>
                 <div class="file-name"> {{file.extension}}

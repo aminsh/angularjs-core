@@ -1,5 +1,5 @@
 /* @ngInject */
-export function fileViewer() {
+export function fileViewer(environment) {
     return {
         restrict: 'E',
         templateUrl: 'dsCore/controls/fileViewer.html',
@@ -31,7 +31,7 @@ export function fileViewer() {
                 const fileName = typeof file === 'string' ? file : file.fileName;
 
                 return {
-                    name: fileName,
+                    name: `${environment.ROOT_URL}/${fileName}`,
                     extension: fileName.split('.').pop().toUpperCase(),
                     category: getCategory(fileName.split('.').pop().toUpperCase())
                 }
