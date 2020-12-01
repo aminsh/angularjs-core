@@ -33,9 +33,8 @@ export class NotifyService {
             controllerAs: 'model',
             bindToController: true,
             locals: { toastMessage: message, options },
-            //parent: document.getElementById('page-wrapper'),
             parent: document.getElementsByTagName('body')[0],
-            templateUrl: 'partials/directives/notify.html'
+            templateUrl: 'dsCore/controls/notify.html'
         }).then(function (result) {
 
         }).catch(function (error) {
