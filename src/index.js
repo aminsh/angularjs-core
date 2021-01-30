@@ -9,6 +9,8 @@ import _ from 'lodash';
 import { dsDataTable } from './datatable';
 import { sidebar } from "./sidebar/sidebar";
 import { preImageLoader, list, listItem } from "./widget";
+import { ComponentsConfiguration } from "./components";
+import { ReportConfiguration } from "./report";
 import {
     datepicker,
     combobox,
@@ -36,7 +38,9 @@ import { mdConfig } from "./configs/mdConfig";
 
 _.templateSettings.interpolate = /#([\s\S]+?)#/g;
 
-angular.module('ds-core', [ 'ngMaterial', 'angular-material-persian-datepicker', 'ngCookies', 'pascalprecht.translate', 'dynamicNumber', 'ui.router' ])
+const dsCoreModule = angular.module('ds-core',
+    [ 'ngMaterial', 'angular-material-persian-datepicker', 'ngCookies', 'pascalprecht.translate', 'dynamicNumber', 'ui.router' ]);
+dsCoreModule
     .config(dsNumberConfig)
     .config(mdConfig)
     .directive('dsSidebar', sidebar)
@@ -51,9 +55,7 @@ angular.module('ds-core', [ 'ngMaterial', 'angular-material-persian-datepicker',
     .directive('dsPreImageLoader', preImageLoader)
     .directive('dsList', list)
     .directive('dsListItem', listItem)
-
     .controller('notifyController', NotifyController)
-
     .service('notify', NotifyService)
     .service('httpRequest', HttpRequest)
     .service('promise', Promise)
@@ -67,6 +69,11 @@ angular.module('ds-core', [ 'ngMaterial', 'angular-material-persian-datepicker',
     .factory('confirm', Confirm)
 ;
 
+ComponentsConfiguration.configure(dsCoreModule);
+ReportConfiguration.configure(dsCoreModule);
+
+
 export const CoreModule = 'ds-core';
 export * from './utils';
+export * from './dataGrid';
 export { DsDialog, registerDialog, DialogProvider } from './services';
