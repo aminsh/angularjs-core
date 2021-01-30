@@ -1,0 +1,15 @@
+<md-dialog aria-label="print" flex="70">
+    <md-toolbar>
+        <div class="md-toolbar-tools" >
+            <h2>{{ $ctrl.report.text }}</h2>
+            <span flex></span>
+
+            <ds-fullscreen-button></ds-fullscreen-button>
+            <ds-close-button></ds-close-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <ds-report-viewer options="$ctrl.options"></ds-report-viewer>
+    </md-dialog-content>
+</md-dialog>
