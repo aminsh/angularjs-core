@@ -63,3 +63,4 @@ testem.log
 # Others
 package-lock.json
 dist
+/gridAndDataTableChanges
