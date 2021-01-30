@@ -30,7 +30,7 @@ import {
     NavigateService,
     Logger,
     Confirm,
-    FormService
+    FormService, ServicesConfiguration
 } from './services';
 import { paging } from './paging';
 import { environmentProvider } from "./providers/environmentProvider";
@@ -71,9 +71,9 @@ dsCoreModule
 
 ComponentsConfiguration.configure(dsCoreModule);
 ReportConfiguration.configure(dsCoreModule);
+ServicesConfiguration.configure(dsCoreModule);
 
 
 export const CoreModule = 'ds-core';
 export * from './utils';
-export * from './dataGrid';
 export { DsDialog, registerDialog, DialogProvider } from './services';
