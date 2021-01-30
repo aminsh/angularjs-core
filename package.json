@@ -1,6 +1,6 @@
 {
   "name": "storm-ui-core",
-  "version": "1.0.25",
+  "version": "1.0.34",
   "description": "",
   "types": "types/index.d.ts",
   "module": "index.js",
@@ -8,11 +8,12 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist coverage",
-    "build": "npm run clean && rollup -c && gulp build-template && gulp concat && copyfiles types/* package.json dist/ && rimraf dist/temp",
+    "build": "npm run clean && rollup -c && gulp build-template && gulp concat && copyfiles types/* style/* lib/* package.json dist/ && rimraf dist/temp",
     "uglify": "for f in dist/*.js; do ./node_modules/uglify-es/bin/uglifyjs $f --compress drop_console --mangle --output ${f%.js}.min.js; done",
     "release": "standard-version",
     "postrelease": "git push origin master --follow-tags",
-    "rollup": "rollup -c"
+    "rollup": "rollup -c",
+    "build-and-test": "npm run build && rimraf sample/angularjs-typescript-webpack/core && copyfiles dist/types/* dist/* -a -f sample/angularjs-typescript-webpack/core"
   },
   "author": "Amin Sheikhi",
   "license": "ISC",
