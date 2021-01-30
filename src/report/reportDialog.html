@@ -1,7 +1,7 @@
 <md-dialog aria-label="print" flex="70">
-    <md-toolbar>
+    <md-toolbar ng-if="$ctrl.reportReady">
         <div class="md-toolbar-tools" >
-            <h2>{{ $ctrl.report.text }}</h2>
+            <h2>{{ $ctrl.options.title }}</h2>
             <span flex></span>
 
             <ds-fullscreen-button></ds-fullscreen-button>
@@ -10,6 +10,11 @@
     </md-toolbar>
 
     <md-dialog-content>
-        <ds-report-viewer options="$ctrl.options"></ds-report-viewer>
+        <div layout="row" layout-sm="column" layout-align="space-around" ng-if="!$ctrl.reportReady"
+             style="padding-top: 50px;padding-bottom: 50px;overflow: hidden;">
+            <md-progress-circular md-mode="indeterminate" md-diameter="50"></md-progress-circular>
+        </div>
+
+        <ds-report-viewer options="$ctrl.options" ng-if="$ctrl.reportReady"></ds-report-viewer>
     </md-dialog-content>
 </md-dialog>

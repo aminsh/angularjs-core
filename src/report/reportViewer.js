@@ -2,7 +2,7 @@ import { defaultViewerConfig, addVariable } from "./reportTools";
 import { Guid } from "../utils";
 
 /* @ngInject */
-export function reportViewer(dsReportConfig, environment) {
+export function reportViewer(dsReportConfig, environment, $timeout) {
     return {
         restrict: 'E',
         template: '<div id="contentViewer" style="direction: ltr"></div>',
@@ -23,7 +23,10 @@ export function reportViewer(dsReportConfig, environment) {
             $(element).find('div').attr('id', id);
 
             report.loadFile(`${ dsReportConfig.baseURL }/${ scope.options.filename }?token=${ environment.TENANT_KEY }`);
-            viewer.renderHtml(id);
+            $timeout(() => {
+                viewer.renderHtml(id);
+            }, 500);
+
 
             dsReportConfig.variables.forEach(variable => {
                 report.dictionary.variables.add(addVariable(variable));

@@ -1,6 +1,7 @@
 import { reportViewer } from "./reportViewer";
 import { reportConfigProvider } from "./reportConfigProvider";
 import { ReportDialog } from "./reportDialog";
+import { ReportLoader } from "./reportLoader";
 
 export class ReportConfiguration {
     static configure(module) {
@@ -15,5 +16,6 @@ export class ReportConfiguration {
                     templateUrl: 'dsCore/report/reportDialog.html'
                 });
             })
+            .service('reportLoader', ReportLoader)
     }
 }
