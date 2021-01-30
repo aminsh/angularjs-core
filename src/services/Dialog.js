@@ -1,3 +1,5 @@
+import { camelize } from "../utils";
+
 export class DialogService {
     /* @ngInject */
     constructor($mdDialog, $state, $transitions, promise) {
@@ -5,6 +7,10 @@ export class DialogService {
         this.promise = promise;
         this.$state = $state;
         this.$transitions = $transitions;
+    }
+
+    createForService(options) {
+        return dialogFactory(this.promise, this.$mdDialog, options);
     }
 
     createForRoute(options) {
@@ -85,12 +91,6 @@ export const DialogProvider = {
     fromRoute: 'fromRoute'
 }
 
-function camelize(str) {
-    return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
-        return index === 0 ? word.toLowerCase() : word.toUpperCase();
-    }).replace(/\s+/g, '');
-}
-
 function dialogFactory(promise, $mdDialog, options) {
     return {
         show: parameters => {
@@ -100,6 +100,7 @@ function dialogFactory(promise, $mdDialog, options) {
                         controller: options.controller,
                         controllerAs: options.controllerAs,
                         template: options.template,
+                        templateUrl: options.templateUrl,
                         parent: angular.element(document.body),
                         //targetEvent: ev,
                         //clickOutsideToClose: true,
