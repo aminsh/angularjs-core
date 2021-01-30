@@ -140,3 +140,11 @@ export interface IFormService {
 
     setDirtySubForm(form: any): void;
 }
+
+export interface IPromise {
+    create(handler: (resolve: (result: any) => void, reject: (e: any) => void) => void): void;
+
+    all(promises: Promise<any>[]): void;
+
+    resolve(promiseOrValue: Promise<any> | any): Promise<any>;
+}

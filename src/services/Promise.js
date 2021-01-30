@@ -21,4 +21,8 @@ export class Promise {
 
         return deferred.promise;
     }
+
+    resolve(promiseOrValue) {
+        return this.$q.resolve(promiseOrValue);
+    }
 }
