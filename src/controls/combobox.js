@@ -1,4 +1,4 @@
-import { Guid } from '../utils/string';
+import { Guid } from '../utils';
 import * as _ from 'lodash';
 
 /* @ngInject */

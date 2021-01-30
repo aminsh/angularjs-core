@@ -1,6 +1,7 @@
 import swal from "sweetalert";
 
 export class Logger {
+    /* @ngInject */
     constructor(translate, notify) {
         this.notify = notify;
         this.translate = translate;

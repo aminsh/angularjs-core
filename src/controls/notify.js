@@ -1,4 +1,5 @@
 export class NotifyController {
+    /* @ngInject */
     constructor($mdToast, navigate) {
         this.$mdToast = $mdToast;
         this.navigate = navigate;
@@ -19,6 +20,7 @@ export class NotifyController {
 }
 
 export class NotifyService {
+    /* @ngInject */
     constructor($mdToast) {
         this.$mdToast = $mdToast;
     }
