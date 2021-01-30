@@ -31,7 +31,7 @@ export function fileViewer(environment) {
                 const fileName = typeof file === 'string' ? file : file.fileName;
 
                 return {
-                    name: `${environment.ROOT_URL}/${fileName}`,
+                    name: fileName.startsWith('http')? fileName : `${environment.ROOT_URL}/${fileName}`,
                     extension: fileName.split('.').pop().toUpperCase(),
                     category: getCategory(fileName.split('.').pop().toUpperCase())
                 }
