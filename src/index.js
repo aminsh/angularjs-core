@@ -18,8 +18,9 @@ import {
     dsNumberConfig,
     blurEnter,
     fileViewer,
+    imageViewer,
     fileUploader,
-    NotifyService, NotifyController
+    NotifyService, NotifyController, dsPdfViewerComponent, dsPdfViewerController
 } from './controls';
 import {
     HttpRequest,
@@ -43,6 +44,7 @@ const dsCoreModule = angular.module('ds-core',
 dsCoreModule
     .config(dsNumberConfig)
     .config(mdConfig)
+
     .directive('dsSidebar', sidebar)
     .directive('dsDatatable', dsDataTable)
     .directive('dsDatepicker', datepicker)
@@ -50,11 +52,24 @@ dsCoreModule
     .directive('blueEnter', blurEnter)
     .directive('dsNumber', dsNumber)
     .directive('dsFileViewer', fileViewer)
+    .directive('dsImageViewer', imageViewer)
     .directive('dsFileUploader', fileUploader)
     .directive('dsPaging', paging)
     .directive('dsPreImageLoader', preImageLoader)
+
     .directive('dsList', list)
     .directive('dsListItem', listItem)
+
+    .controller('dsPdfViewerController', dsPdfViewerController)
+    .directive('dsPdfViewerComponent', dsPdfViewerComponent)
+    .factory('dsPdfViewer', /*@ngInject*/ (dsDialog) => {
+        return dsDialog.createForService({
+            controller: 'dsPdfViewerController',
+            controllerAs: 'model',
+            templateUrl: 'dsCore/controls/dsPdfViewer.html'
+        });
+    })
+
     .controller('notifyController', NotifyController)
     .service('notify', NotifyService)
     .service('httpRequest', HttpRequest)
@@ -68,6 +83,7 @@ dsCoreModule
     .service('logger', Logger)
     .factory('confirm', Confirm)
 ;
+
 
 ComponentsConfiguration.configure(dsCoreModule);
 ReportConfiguration.configure(dsCoreModule);

@@ -1,0 +1,18 @@
+<md-dialog aria-label="pdf viewer" class="fullscreen-dialog" style="background-color: transparent">
+    <form ng-cloak>
+        <md-toolbar style="background-color: transparent">
+            <div class="md-toolbar-tools">
+                <span flex></span>
+                <ds-close-button></ds-close-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content style="height: 100%">
+            <ds-pdf-viewer-component ng-if="model.canShow" url="{{ model.url }}"></ds-pdf-viewer-component>
+        </md-dialog-content>
+    </form>
+</md-dialog>
+
+
+
+

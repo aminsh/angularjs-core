@@ -1,30 +1,35 @@
-<div layout="row" layout-align="space-between" layout-wrap="">
-    <div layout="row" flex="10" flex-lg="15" flex-md="20" flex-sm="25" flex-xs="50" layout-align="center center"
-         ng-if="editable">
-        <div class="uploaderBox"><a>
-            <ds-file-uploader is-singular="true" uploader-action="uploader"
-                              uploaded="onImageUploaded(fileName)"></ds-file-uploader>
-        </a></div>
-    </div>
-    <div flex="90" flex-lg="85" flex-md="80" flex-sm="75" flex-xs="50" layout="row" layout-wrap=""
-         layout-align="flex-start center"> <!--ng-class="{'m-r': $index !== 0}"-->
-        <div layout="row" layout-align="center center" flex="10" flex-lg="15" flex-md="20" flex-sm="33" flex-xs="100"
-             ng-repeat="file in files">
-            <div class="uploaderPreview">
-                <div ng-if="file.category === 'image'"><a href="{{file.name}}" data-gallery=""> <img
-                        src="{{file.name}}" preload-image> </a></div>
-                <div ng-if="file.category !== 'image'"><a href="{{file.name}}" target="_blank"><i
-                        class="fa fa-file"></i></a></div>
-                <div class="file-name"> {{file.extension}}
-                    <span ng-if="editable">
+<div layout="column">
+    <div id="container">
+        <div flex="90" flex-lg="85" flex-md="80" flex-sm="75" flex-xs="50" layout="row" layout-wrap=""
+             layout-align="flex-start center">
+            <div layout="row" layout-align="center center" flex="10" flex-lg="15" flex-md="20" flex-sm="33"
+                 flex-xs="100"
+                 ng-repeat="file in files">
+                <div class="uploaderPreview">
+                    <div ng-if="file.category === 'image'"><a href="{{file.filename}}">
+                        <img ds-image-viewer src="{{file.filename}}" preload-image> </a></div>
+                    <div ng-if="file.category !== 'image'"><a href="{{file.filename}}" target="_blank"><i
+                            class="fa fa-file"></i></a></div>
+                    <div class="file-name"> {{file.extension}}
+                        <span ng-if="editable">
                         <md-icon md-svg-src="md-delete"
-                                class="pointer text-danger"
-                                aria-label="remove"
-                                title="{{'Remove'|translate}}"
-                                ng-click="remove(file)"></md-icon>
+                                 class="pointer text-danger"
+                                 aria-label="remove"
+                                 title="{{'remove'|translate}}"
+                                 ng-click="remove(file)"></md-icon>
                     </span>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="m-t" layout="row" flex="10" flex-lg="15" flex-md="20" flex-sm="25" flex-xs="50" layout-align="center center"
+         ng-if="editable">
+        <div class="uploaderBox">
+            <a>
+                <ds-file-uploader is-singular="true" uploader-action="uploader"
+                                  uploaded="onImageUploaded(fileName, originalFileName)"></ds-file-uploader>
+            </a>
         </div>
     </div>
 </div>

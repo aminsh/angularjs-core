@@ -1,0 +1,16 @@
+.md-datepicker-input {
+  text-align: right !important;
+}
+
+.uploaderBox {
+  .dropzone {
+    min-height: 100px;
+    padding: 10px;
+    margin: 20px auto 0;
+    height: 130PX;
+    width: 130px;
+    .dz-preview {
+      width: 100%;
+    }
+  }
+}

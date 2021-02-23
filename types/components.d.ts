@@ -18,3 +18,15 @@ export interface ISideMenuItem {
     underDevelop?: boolean;
     children?: Array<ISideMenuItem>
 }
+
+export interface IPdfViewerParameters {
+    url: string;
+}
+
+export class IPdfViewerDialog {
+    show(parameters: IPdfViewerParameters): void;
+}
+
+export class IDataTable<T> {
+    setFocus(item: T, element: string);
+}

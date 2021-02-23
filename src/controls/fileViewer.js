@@ -1,8 +1,7 @@
 /* @ngInject */
-export function fileViewer(environment) {
+export function fileViewer(environment, dsPdfViewer, $templateCache) {
     return {
         restrict: 'E',
-        templateUrl: 'dsCore/controls/fileViewer.html',
         scope: {
             fileList: '=',
             fileName: '@',
@@ -10,47 +9,71 @@ export function fileViewer(environment) {
             fileAdded: '&',
             fileRemoved: '&'
         },
-        link(scope, elements, attrs) {
-            const imageGroups = {
-                image: [ 'JPG', 'PNG', 'JPEG' ],
-                text: [ 'TXT', 'XLS', 'XLSX', 'DOC' ],
-                pdf: [ 'PDF' ]
-            };
+        template: function (element, attrs) {
+            attrs['$userTemplate'] = element.clone();
+            return $templateCache.get('dsCore/controls/fileViewer.html')
+        },
+        compile(tElement, tAttrs) {
+            const $element = $(tElement);
+            const $userTemplate = $(tAttrs.$userTemplate);
+            const $container = $element.find('#container');
+            if ($userTemplate.length > 0) {
+                const $dsFileTemplate = $userTemplate.find('ds-file-template');
 
-            function getCategory(ext) {
-                let cat = '';
-                Object.keys(imageGroups).forEach(key => {
-                    if (imageGroups[ key ].includes(ext))
-                        cat = key;
-                });
-
-                return cat;
-            }
-
-            function mapper(file) {
-                const fileName = typeof file === 'string' ? file : file.fileName;
-
-                return {
-                    name: fileName.startsWith('http')? fileName : `${environment.ROOT_URL}/${fileName}`,
-                    extension: fileName.split('.').pop().toUpperCase(),
-                    category: getCategory(fileName.split('.').pop().toUpperCase())
+                if ($dsFileTemplate.length > 0) {
+                    $container.html($dsFileTemplate.html());
                 }
             }
+            return function (scope, elements, attrs) {
+                const imageGroups = {
+                    image: [ 'JPG', 'PNG', 'JPEG' ],
+                    text: [ 'TXT', 'XLS', 'XLSX', 'DOC' ],
+                    pdf: [ 'PDF' ]
+                };
 
-            scope.files = ( scope.fileList || [ scope.fileName ] ).map(mapper);
+                function getCategory(ext) {
+                    let cat = '';
+                    Object.keys(imageGroups).forEach(key => {
+                        if (imageGroups[key].includes(ext))
+                            cat = key;
+                    });
 
-            scope.onImageUploaded = (fileName) => {
-                scope.files.push(mapper(fileName));
-                scope.fileAdded({ $fileName: fileName });
-                scope.uploader.removeAllFiles();
-            };
+                    return cat;
+                }
 
-            scope.remove = file => {
-                scope.files.asEnumerable().remove(file);
-                scope.fileRemoved({ $fileName: file.name });
-            };
+                function mapper(file) {
+                    const fileName = typeof file === 'string' ? file : file.fileName;
 
-            scope.uploader = {};
-        }
+                    return {
+                        filename: fileName.startsWith('http') ? fileName : `${ environment.ROOT_URL }/${ fileName }`,
+                        name: file.name,
+                        extension: fileName.split('.').pop().toUpperCase(),
+                        category: getCategory(fileName.split('.').pop().toUpperCase()),
+                        isSelected: false
+                    }
+                }
+
+                scope.files = (scope.fileList || [ scope.fileName ]).map(mapper);
+
+                scope.onImageUploaded = (fileName, originalFileName) => {
+                    const $file = { fileName, name: originalFileName };
+                    scope.files.push(mapper($file));
+                    scope.fileAdded({ $file });
+                    scope.uploader.removeAllFiles();
+                };
+
+                scope.remove = file => {
+                    scope.files.remove(file);
+                    scope.fileRemoved({ $fileName: file.name });
+                };
+
+                scope.uploader = {};
+                scope.getFiles = () => scope.files;
+                scope.showPdf = url => {
+                    dsPdfViewer.show({ url });
+                };
+            }
+        },
+
     }
 }
