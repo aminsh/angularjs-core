@@ -7,6 +7,15 @@ Array.prototype.asEnumerable = function () {
     return enumerable;
 };
 
+Array.prototype.remove = function (item) {
+    let i = this.indexOf(item);
+    this.splice(i, 1);
+}
+
+Array.prototype.toArray = function () {
+    return this;
+}
+
 function remove(item) {
     var i = this.indexOf(item);
     this.splice(i, 1);

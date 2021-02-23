@@ -97,7 +97,7 @@ export function dsDataTable($compile, $rootScope, $templateCache) {
                     if (scope.current === item)
                         scope.setCurrent(null);
 
-                    scope.items.asEnumerable().remove(item);
+                    scope.items.remove(item);
 
                     scope.onItemRemoved({ $item: item });
                 };
@@ -108,9 +108,12 @@ export function dsDataTable($compile, $rootScope, $templateCache) {
                     if (!scope.items)
                         scope.items = [ {} ];
 
-                    scope.items.push(item);
+                    const instance = scope.onItemCreated({ $item: item });
 
-                    scope.onItemCreated({ $item: item });
+                    if (instance)
+                        item = instance;
+
+                    scope.items.push(item);
 
                     scope.setCurrent(item);
                 };

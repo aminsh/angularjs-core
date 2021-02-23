@@ -1,4 +1,4 @@
-<tr ng-repeat# itemDetail === 'none' ? '' : '-start' #="item in items | orderBy: orderBy"
+<tr ng-repeat# itemDetail === 'none' ? '' : '-start' #="item in items.toArray() | orderBy: orderBy"
     ng-click="setCurrent(item)"
     ng-dblclick="onDblClicked(item)"
     ng-keyup="keyup($event, item)"
