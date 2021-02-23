@@ -1,17 +1,19 @@
 <div layout="row" layout-align="start center" style="height: 45px">
-    <span style="font-size: 12px" uib-tooltip="{{'Total items'|translate}}">{{total}}</span>
+    <span style="font-size: 12px">
+        <md-tooltip md-direction="bottom">{{ 'total_rows'|translate }}</md-tooltip>
+        {{total}}
+    </span>
 
 
     <div flex></div>
 
     <div layout="row" layout-align="space-around center">
-        <md-button class="md-icon-button m-l-lg"
-                   uib-tooltip="{{'Refresh'|translate}}"
-                   ng-click="change()">
+        <md-button class="md-icon-button m-l-lg" ng-click="change()">
+            <md-tooltip md-direction="bottom">{{ 'refresh'|translate }}</md-tooltip>
             <md-icon md-svg-src="md-refresh" aria-label="refresh paging"></md-icon>
         </md-button>
 
-        <span class="m-l-sm m-r-lg" style="font-size: 12px">{{'Items per page'|translate}} : </span>
+        <span class="m-l-sm m-r-lg" style="font-size: 12px">{{'page_size'|translate}} : </span>
         <md-select ng-model="pageSize" required name="pageSize" class="m-l-lg">
             <md-option ng-repeat="ps in pageSizes"
                        ng-value="ps"
@@ -21,34 +23,30 @@
         </md-select>
 
         <span class="mr30 ml30" style="font-size: 12px">
-            {{currentPage}} {{'Of'|translate}} {{totalPages}}
+            {{currentPage}} {{'from'|translate}} {{totalPages}}
         </span>
 
         <md-button class="md-icon-button"
-                   ng-disabled="currentPage === 1"
-                   uib-tooltip="{{'First'|translate}}"
-                   ng-click="first()">
+                   ng-disabled="currentPage === 1" ng-click="first()">
+            <md-tooltip md-direction="bottom">{{ 'first'|translate }}</md-tooltip>
             <md-icon md-svg-src="md-last-page" aria-label="previous paging"></md-icon>
         </md-button>
 
         <md-button class="md-icon-button"
-                   ng-disabled="currentPage === 1"
-                   uib-tooltip="{{'Previous'|translate}}"
-                   ng-click="previous()">
+                   ng-disabled="currentPage === 1" ng-click="previous()">
+            <md-tooltip md-direction="bottom">{{ 'previous'|translate }}</md-tooltip>
             <md-icon md-svg-src="md-right" aria-label="previous paging"></md-icon>
         </md-button>
 
         <md-button class="md-icon-button"
-                   ng-disabled="currentPage === totalPages"
-                   uib-tooltip="{{'Next'|translate}}"
-                   ng-click="next()">
+                   ng-disabled="currentPage === totalPages" ng-click="next()">
+            <md-tooltip md-direction="bottom">{{ 'next'|translate }}</md-tooltip>
             <md-icon md-svg-src="md-left" aria-label="next paging"></md-icon>
         </md-button>
 
         <md-button class="md-icon-button"
-                   ng-disabled="currentPage === totalPages"
-                   uib-tooltip="{{'Last'|translate}}"
-                   ng-click="last()">
+                   ng-disabled="currentPage === totalPages" ng-click="last()">
+            <md-tooltip md-direction="bottom">{{ 'last'|translate }}</md-tooltip>
             <md-icon md-svg-src="md-first-page" aria-label="last paging"></md-icon>
         </md-button>
     </div>

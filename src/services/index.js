@@ -1,4 +1,5 @@
 import { Loading } from "./Loading";
+import { TranslateLoader } from "./TranslateLoader";
 
 export * from './HttpRequest';
 export * from './Promise';
@@ -21,5 +22,6 @@ export class ServicesConfiguration {
                     templateUrl: 'dsCore/services/Loading.html'
                 });
             })
+            .factory('dsTranslateLoader', TranslateLoader)
     }
 }

@@ -21,13 +21,13 @@
     </md-item-template>
 
     <div id="msg" ng-messages="form.autocompleteField.$error" ng-if="form.autocompleteField.$dirty">
-        <div ng-message="required">{{'This field is required' | translate}}</div>
+        <div ng-message="required">{{'this_field_is_required' | translate}}</div>
     </div>
 
     <md-not-found>
         <span ng-show="searchText.length > 0">"{{searchText}}" {{'Not found'|translate}}</span>
         <span ng-show="searchText.length > 0 && hasCreate">
-            <a ng-click="create(searchText)">{{'Create'|translate}}</a>
+            <a ng-click="create(searchText)">{{'create'|translate}}</a>
         </span>
     </md-not-found>
 

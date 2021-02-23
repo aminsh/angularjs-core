@@ -1,14 +1,14 @@
 <md-sidenav class="md-sidenav-right sidemenu"
             id="main-side-nav"
             md-component-id="sidebar"
-            md-whiteframe="4"  md-is-locked-open="isOpen ? $mdMedia('gt-sm') : '' " ><!--hide-gt-sm    style="width: 100%;" md-is-locked-open="$mdMedia('gt-sm')"-->
+            md-whiteframe="4"  md-is-locked-open="isOpen ? $mdMedia('gt-sm') : '' " >
 
     <md-content class="no-padding" style="height: calc(100vh - 63px);">
         <ul id="md-side-menu" class="nav md-nav no-padding" style="display: none;">
             <li>
-                <a ui-sref-active="active" ng-click="toggleMdSidebar()" ui-sref="home" title="{{'Home'|translate}}">
+                <a ui-sref-active="active" ng-click="toggleMdSidebar()" ui-sref="home">
                     <md-icon md-svg-src="md-home" ></md-icon>
-                    <span class="nav-label">{{'Home'|translate}}</span>
+                    <span class="nav-label">{{'home'|translate}}</span>
                 </a>
             </li>
 
@@ -44,28 +44,6 @@
 
                 </ul>
             </li>
-
-            <li class="special_link" ng-if="canShowMenu({})" >
-                <a ui-sref-active="active" ui-sref="thirdParty"
-                   title="{{ 'Third parties'|translate }}">
-                    <md-icon md-svg-src="md-Extension" ></md-icon>
-                    <span class="nav-label">{{ 'Third parties'|translate }}</span>
-                </a>
-            </li>
-
-            <li ng-if="installedThirdParties.length" >
-                <a title="{{ 'Installed third parties' | translate}}">
-                    <md-icon md-svg-src="md-installed-Extension" ></md-icon>
-                    <span class="nav-label">{{ 'Installed third parties' | translate}}</span>
-                    <span class="fa arrow" ng-if="installedThirdParties.length"></span>
-                </a>
-                <ul class="nav nav-second-level" ng-if="installedThirdParties.length">
-                    <li ng-repeat="thirdParty in installedThirdParties">
-                        <a ui-sref-active="active" ng-click="toggleMdSidebar()" ui-sref="{{thirdParty.url}}">{{thirdParty.title}}</a>
-                    </li>
-                </ul>
-            </li>
-
         </ul>
 
     </md-content>

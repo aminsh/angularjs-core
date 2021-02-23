@@ -1,7 +1,8 @@
 <div class="table-responsive ds-dataTable-box" >
     <div>
         <md-button ng-if="local_addable" aria-label="add item" class="md-raised" style="min-width: unset;margin-left: 0;"
-                   ng-click="addItem()" uib-tooltip="{{'(Insert) Create new row'|translate}}">
+                   ng-click="addItem()">
+            <md-tooltip md-direction="bottom">{{ 'new'|translate }}</md-tooltip>
             <md-icon md-svg-src="md-add"></md-icon>
         </md-button >
 
