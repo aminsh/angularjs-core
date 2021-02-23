@@ -26,7 +26,6 @@ export function combobox(httpRequest, promise, $timeout, $window) {
         },
         templateUrl: 'dsCore/controls/combobox.html',
         compile(tElement, tAttrs) {
-
             let mdAutocomplete = $('md-autocomplete', tElement),
                 itemTemplate = $('md-item-template', mdAutocomplete);
 

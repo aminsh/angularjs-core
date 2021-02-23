@@ -5,7 +5,7 @@ import { template } from "lodash";
 import { itemDetailParser } from "./itemDetailParser";
 
 /* @ngInject */
-export function dsDataTable($compile, $rootScope, $templateCache) {
+export function dsDataTable($compile, $rootScope, $templateCache, $timeout) {
     return {
         restrict: 'E',
         transclude: {
@@ -27,7 +27,8 @@ export function dsDataTable($compile, $rootScope, $templateCache) {
             onDoubleClicked: '&',
             onItemRemoved: '&',
             onItemCreated: '&',
-            onKeyPress: '&'
+            onKeyPress: '&',
+            onInit: '&'
         },
         templateUrl: 'dsCore/datatable/dsDataTable.html',
         compile(tElement, tAttrs, transclude) {
@@ -106,7 +107,7 @@ export function dsDataTable($compile, $rootScope, $templateCache) {
                     let item = {};
 
                     if (!scope.items)
-                        scope.items = [ {} ];
+                        scope.items = [];
 
                     const instance = scope.onItemCreated({ $item: item });
 
@@ -189,7 +190,7 @@ export function dsDataTable($compile, $rootScope, $templateCache) {
                 };
 
                 function compile(html) {
-                    if (!html.startsWith('<'))
+                    if (!html.trim().startsWith('<'))
                         return;
                     const linkFn = $compile(html);
                     return linkFn(scope);
@@ -300,6 +301,16 @@ export function dsDataTable($compile, $rootScope, $templateCache) {
 
                     $elm.focus();
                 }
+
+                const $dataTable = {
+                    setFocus: (item, element) => {
+                       $timeout(()=> {
+                           setFocus(item.id, element);
+                       }, 500);
+                    }
+                }
+
+                scope.onInit({ $dataTable });
             }
         }
     }

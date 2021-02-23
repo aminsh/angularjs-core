@@ -55,7 +55,7 @@
     <% } else if(column.editor && column.editor.element === 'date') { %>
     <ds-datepicker name="# column.name #"
            ng-model="# column.ngModel #"
-           md-select-on-focus
+           md-select-on-focus input-class="has-border-on-focus"
            class="ds-dataTable-datepicker"
 
     <% Object.keys(column.editor).forEach(function(key) { %>
