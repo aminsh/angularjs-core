@@ -1,6 +1,6 @@
 /* @ngInject */
 export function mdConfig($mdIconProvider, $$mdSvgRegistry, $sceDelegateProvider) {
-    $sceDelegateProvider.resourceUrlWhitelist([ 'data:**' ]);
+    $sceDelegateProvider.resourceUrlWhitelist([ 'data:**', 'self' ]);
 
     $mdIconProvider
         .icon('md-close', $$mdSvgRegistry.mdClose)

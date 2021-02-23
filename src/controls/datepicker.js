@@ -1,4 +1,5 @@
 import moment from 'moment-jalaali'
+
 /* @ngInject */
 export function datepicker() {
     return {
@@ -12,6 +13,10 @@ export function datepicker() {
         },
         link: (scope, element, attrs, ngModel) => {
             $(element).addClass('ds-datepicker');
+            const $input = element.find('input');
+            $input.attr('name', attrs.name);
+            if (attrs.hasOwnProperty('inputClass'))
+                $input.addClass(attrs.inputClass);
 
             scope.localDate = null;
 
@@ -38,7 +43,7 @@ export function datepicker() {
                 if (typeof date === 'string')
                     date = new Date(date);
 
-                let dateToString = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+                let dateToString = `${ date.getFullYear() }/${ date.getMonth() + 1 }/${ date.getDate() }`;
 
                 return moment(dateToString).format('jYYYY/jMM/jDD');
             }

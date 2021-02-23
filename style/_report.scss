@@ -1136,3 +1136,27 @@ License: https://www.stimulsoft.com/en/licensing/reports
 .stiJsViewerLoginButtonDisabled {
   background: #3b629b
 }
+
+ds-report-viewer {
+  > div {
+    overflow-x: auto;
+    min-height: 914px;
+  }
+
+  .stiJsViewerToolBar {
+    overflow: visible;
+  }
+
+  .stiJsViewerReportPanel {
+    overflow: visible !important;
+  }
+}
+
+ds-report-viewer, ds-report-designer {
+  * {
+    direction: unset;
+    box-sizing: unset;
+    font-family: "IRANSans";
+  }
+}
+
