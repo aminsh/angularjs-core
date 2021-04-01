@@ -30,3 +30,13 @@ export class IPdfViewerDialog {
 export class IDataTable<T> {
     setFocus(item: T, element: string);
 }
+
+export interface IPageable<T> {
+    data: T[];
+    total: number;
+}
+
+export interface IDataSource<T> {
+    find(parameters: any): Promise<IPageable<T>>;
+    findOne(parameters: any): Promise<T>
+}

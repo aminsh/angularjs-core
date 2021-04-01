@@ -1,4 +1,18 @@
-export function closeButton($mdDialog) {
+/**
+ * @ngdoc directive
+ * @name CoreModule.directive:dsCloseButton
+ * @restrict E
+ * @scope
+ * @param {Function} onClosing On closing dialog
+ *
+ * @description
+ *
+ *
+ * @example
+ */
+
+/*@ngInject*/
+export function dsCloseButton($mdDialog) {
     return {
         restrict: 'E',
         template: `<md-button class="md-icon-button" ng-click="cancel()" style="margin-left: 0">

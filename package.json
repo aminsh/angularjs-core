@@ -1,6 +1,6 @@
 {
   "name": "storm-ui-core",
-  "version": "1.0.45",
+  "version": "1.0.51",
   "description": "",
   "types": "types/index.d.ts",
   "module": "index.js",
@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist coverage",
-    "build": "npm run clean && rollup -c && gulp build-template && gulp concat && copyfiles types/* style/* lib/* package.json dist/ && rimraf dist/temp",
+    "build": "npm run clean && rollup -c && copyfiles types/* style/* lib/* package.json dist/ && rimraf dist/temp",
     "uglify": "for f in dist/*.js; do ./node_modules/uglify-es/bin/uglifyjs $f --compress drop_console --mangle --output ${f%.js}.min.js; done",
     "release": "standard-version",
     "postrelease": "git push origin master --follow-tags",
@@ -56,6 +56,7 @@
     "babel-plugin-syntax-async-functions": "^6.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-html-import-require-to-string": "0.0.3",
     "babel-plugin-transform-regenerator": "^6.1.4",
     "babel-polyfill": "^6.1.4",
     "babel-preset-es2015": "^6.24.1",
@@ -78,6 +79,7 @@
     "gulp-if": "^2.0.2",
     "gulp-inject": "^4.2.0",
     "gulp-minify": "0.0.14",
+    "gulp-ngdocs": "^0.3.0",
     "gulp-nodemon": "^2.2.1",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",

@@ -14,3 +14,26 @@
     }
   }
 }
+
+.ds-datepicker {
+  width: 100%;
+  .md-button.md-icon-button {
+    position: absolute;
+  }
+
+  .md-ink-ripple {
+    top: -3px;
+    right: -12px;
+  }
+
+  .md-icon-button + .md-datepicker-input-container {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .md-input {
+    padding: 0 35px !important;
+    border-bottom: none;
+  }
+}
