@@ -185,6 +185,7 @@ export class ODataQueryBuilder {
 
         const operatorsMapping = {
             eq: 'eq',
+            ne: 'ne',
             gt: 'gt',
             gte: 'ge',
             lt: 'lt',
@@ -192,7 +193,7 @@ export class ODataQueryBuilder {
         };
 
         filters.forEach(filter => {
-            if ([ 'eq', 'gt', 'gte', 'lt', 'lte' ].includes(filter.operator))
+            if (Object.keys(operatorsMapping).includes(filter.operator))
                 where.push({ field: filter.field, operator: operatorsMapping[filter.operator], value: filter.value });
 
             if (filter.operator === 'contains')
@@ -283,6 +284,9 @@ export class ODataQueryBuilder {
 
     executeAsKendo(parameters) {
         const instance = this.clone();
+
+        if(parameters.hasOwnProperty('paging'))
+            instance.paging = parameters.paging;
 
         return this.promise.create((resolve, reject) => {
             instance._parseKendoParameters(parameters).execute()
