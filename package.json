@@ -8,12 +8,13 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist coverage",
-    "build": "npm run clean && rollup -c && copyfiles types/* style/* lib/* package.json dist/ && rimraf dist/temp",
+    "build": "npm run clean && rollup -c && copyfiles types/* style/* lib/* package.json dist/ && rimraf dist/temp && gulp ngdocs",
     "uglify": "for f in dist/*.js; do ./node_modules/uglify-es/bin/uglifyjs $f --compress drop_console --mangle --output ${f%.js}.min.js; done",
     "release": "standard-version",
     "postrelease": "git push origin master --follow-tags",
     "rollup": "rollup -c",
-    "build-and-test": "npm run build && rimraf sample/angularjs-typescript-webpack/core && copyfiles dist/types/* dist/* -a -f sample/angularjs-typescript-webpack/core"
+    "build-and-test": "npm run build && rimraf sample/angularjs-typescript-webpack/core && copyfiles dist/types/* dist/* -a -f sample/angularjs-typescript-webpack/core",
+    "ngdocs": "gulp ngdocs"
   },
   "author": "Amin Sheikhi",
   "license": "ISC",
