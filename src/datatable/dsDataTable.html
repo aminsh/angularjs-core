@@ -1,10 +1,28 @@
 <div class="table-responsive ds-dataTable-box" >
     <div>
-        <md-button ng-if="local_addable" aria-label="add item" class="md-raised" style="min-width: unset;margin-left: 0;"
+        <md-menu md-position-mode="target-right target">
+            <md-button aria-label="grid actions" class="md-icon-button"
+                       ng-click="$mdMenu.open($event)">
+                <md-tooltip md-direction="bottom">{{ 'Actions'|translate }}</md-tooltip>
+                <md-icon md-menu-origin md-svg-src="md-more-vert"></md-icon>
+            </md-button >
+            <md-menu-content width="4" class="text-muted" >
+                <md-menu-item>
+                    <md-button class="text-muted" ng-click="chooseColumns()">
+                        <md-icon md-svg-src="md-view-column" aria-label="view columns"></md-icon>
+                        {{ 'Columns'|translate }}
+                    </md-button>
+                </md-menu-item>
+
+                <md-menu-item ng-repeat="toolbarActionItem in toolbarActionItems" ds-html-compile="toolbarActionItem.template"></md-menu-item>
+            </md-menu-content>
+        </md-menu>
+
+        <md-button ng-if="local_addable" aria-label="add item" class="md-icon-button"
                    ng-click="addItem()">
-            <md-tooltip md-direction="bottom">{{ 'new'|translate }}</md-tooltip>
-            <md-icon md-svg-src="md-add"></md-icon>
-        </md-button >
+            <md-tooltip md-direction="bottom">{{ '(Insert) Create new row'|translate }}</md-tooltip>
+            <md-icon md-svg-src="md-add" aria-label="add"></md-icon>
+        </md-button>
 
         <span ng-transclude="toolbar"></span>
     </div>

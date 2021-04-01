@@ -1,11 +1,16 @@
-import { columnsParser } from "./columnsParser";
+import { columnsParser, replaceTemplate } from "./columnsParser";
 import { footerParser } from "./footerParser";
-import { keyboard, getName as keyboardGetName } from "../utils/keyboard";
-import { template } from "lodash";
+import { keyboard } from "../utils";
+import _ from "lodash";
 import { itemDetailParser } from "./itemDetailParser";
+import { Guid } from "../utils";
+import template from './dsDataTable.html';
+import headerTemplate from './headerTemplate.html';
+import footerTemplate from './footerTemplate.html';
+import rowTemplate from './rowTemplate.html';
 
 /* @ngInject */
-export function dsDataTable($compile, $rootScope, $templateCache, $timeout) {
+export function dsDataTable($compile, $rootScope, $timeout, dsGridColumnChooser) {
     return {
         restrict: 'E',
         transclude: {
@@ -30,10 +35,10 @@ export function dsDataTable($compile, $rootScope, $templateCache, $timeout) {
             onKeyPress: '&',
             onInit: '&'
         },
-        templateUrl: 'dsCore/datatable/dsDataTable.html',
+        template,
         compile(tElement, tAttrs, transclude) {
-
             return function link(scope, element, attrs) {
+                scope.dataTableId = Guid.new();
 
                 scope.local_removable = scope.removable === undefined
                     ? true
@@ -59,20 +64,23 @@ export function dsDataTable($compile, $rootScope, $templateCache, $timeout) {
                     $footers = $table.children('tfoot').find('footer'),
                     $item_detail = $table.children('tbody').find('item-detail');
 
+                const toolbarActions = $('toolbar-actions', element);
+                scope.toolbarActionItems = [];
+                toolbarActions.children().each((i, e) => {
+                    scope.toolbarActionItems.push({ template: replaceTemplate(e.innerHTML) });
+                })
+                toolbarActions.remove();
+
                 const itemDetail = itemDetailParser($item_detail) || 'none';
 
                 scope.columns = columnsParser($columns);
-
-                const headerTemplate = $templateCache.get('dsCore/datatable/dataTableHeader-template.html');
+                initMetadata();
 
                 const rendered_header_template = _.template(headerTemplate)({
                     columns: scope.columns,
                 });
 
                 $table.children('thead').html(compile(rendered_header_template));
-
-
-                const rowTemplate = $templateCache.get('dsCore/datatable/dataTableRow-template.html');
 
                 const rendered_row_template = _.template(rowTemplate)({
                     columns: scope.columns,
@@ -83,8 +91,6 @@ export function dsDataTable($compile, $rootScope, $templateCache, $timeout) {
                 $table.children('tbody').html(compile(rendered_row_template));
 
                 const footers = footerParser($footers);
-
-                const footerTemplate = $templateCache.get('dsCore/datatable/dataTableFooter-template.html');
 
                 const rendered_footer_template = _.template(footerTemplate)({
                     columns: scope.columns,
@@ -190,8 +196,6 @@ export function dsDataTable($compile, $rootScope, $templateCache, $timeout) {
                 };
 
                 function compile(html) {
-                    if (!html.trim().startsWith('<'))
-                        return;
                     const linkFn = $compile(html);
                     return linkFn(scope);
                 }
@@ -302,15 +306,82 @@ export function dsDataTable($compile, $rootScope, $templateCache, $timeout) {
                     $elm.focus();
                 }
 
+                scope.chooseColumns = () => {
+                    dsGridColumnChooser.show({
+                        columns: Object.keys(scope.columnMetadata).map(key => ({
+                            name: key,
+                            title: scope.columnMetadata[key].title,
+                            show: scope.columnMetadata[key].show,
+                            index: scope.columnMetadata[key].index,
+                        })), gridId: scope.dataTableId
+                    });
+                };
+
+                $rootScope.$on(`gird:${ scope.dataTableId }:columnChooseChanged`, (e, columns) => {
+                    scope.columnMetadata = columns.asEnumerable().toObject(e => e.name, e => ({
+                        show: e.show,
+                        title: e.title,
+                    }));
+                    setColumnCount();
+                    const state = getState();
+                    if (state) {
+                        state.columns = columns.map(e => ({ name: e.name, show: e.show }));
+                        saveState(state);
+                    }
+                });
+
                 const $dataTable = {
                     setFocus: (item, element) => {
-                       $timeout(()=> {
-                           setFocus(item.id, element);
-                       }, 500);
+                        $timeout(() => {
+                            setFocus(item.id, element);
+                        }, 500);
                     }
                 }
 
                 scope.onInit({ $dataTable });
+
+                function getState() {
+                    if (!scope.name)
+                        return null;
+                    const data = localStorage.getItem(`dataTable:${ scope.name }`);
+                    return data ? JSON.parse(data) : {};
+                }
+
+                function saveState(data) {
+                    if (!scope.name)
+                        return;
+                    localStorage.setItem(`dataTable:${ scope.name }`, JSON.stringify(data));
+                }
+
+                function setColumnCount() {
+                    const columns = Object.keys(scope.columnMetadata)
+                        .map(key => ({ name: key, show: scope.columnMetadata[key].show }))
+                        .filter(e => e.show);
+                    scope.columnCount = columns.length + (scope.local_removable ? 1 : 0);
+                }
+
+                function initMetadata() {
+                    const state = getState();
+                    if (!state) {
+                        scope.columns.forEach(e => e.show = true);
+                    } else {
+                        const columns = state.columns || [];
+
+                        scope.columns = scope.columns.asEnumerable().groupJoin(columns, e => e.name, e => e.name,
+                            (col, items) => {
+                                const item = items.firstOrDefault();
+                                Object.assign(col, { show: item ? item.show : true });
+                                return col
+                            }).toArray();
+                    }
+
+                    scope.columnMetadata = scope.columns.asEnumerable().toObject(e => e.name, e => ({
+                        show: e.show,
+                        title: e.title || e.label,
+                    }));
+
+                    setColumnCount();
+                }
             }
         }
     }

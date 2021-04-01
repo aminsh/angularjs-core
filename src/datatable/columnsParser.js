@@ -2,6 +2,7 @@ import { getValidators, getAttrsValidatorShow } from "./dsDataTableValidator";
 
 const constants = {
     HEADER: 'header',
+    TITLE: 'dt-title',
     HEADER_TEMPLATE: 'column-header-template',
     MODEL: 'model',
     NAME: 'name',
@@ -22,6 +23,8 @@ const constants = {
     SELECT_IMAGE_SRC: 'image-src',
     FOOTER: 'footer',
     NO_COMPILE: 'no-compile-',
+    CLASS: 'class',
+    PREFIX: 'dt-'
 };
 
 export function columnsParser($columns) {
@@ -35,10 +38,10 @@ export function columnsParser($columns) {
     return columns;
 }
 
-
 function columnParser(i, $item) {
     let column = {
         label: $item.attr(constants.HEADER),
+        title: $item.attr(constants.TITLE),
         align: $item.attr(constants.ALIGN),
         header_align: $item.attr(constants.HEADER_ALIGN),
         width: $item.attr(constants.WIDTH),
@@ -46,8 +49,11 @@ function columnParser(i, $item) {
         ngIf: $item.attr(constants.IF),
         ngModel: $item.attr(constants.MODEL),
         name: $item.attr(constants.NAME),
-        footer: $item.attr(constants.FOOTER)
+        footer: $item.attr(constants.FOOTER),
+        class: $item.attr(constants.CLASS)
     };
+
+    column.ngIf = `columnMetadata.${ column.name }.show` + (column.ngIf ? ` && ${ column.ngIf }` : '');
 
     if ($item.find(constants.HEADER_TEMPLATE).length > 0) {
         column.header_template = replaceTemplate($item
@@ -64,7 +70,8 @@ function editorParser($item) {
     let $editor = $item.find(constants.EDITOR);
 
     let editor = {
-        element: $editor.attr(constants.EDITOR_TYPE)
+        element: $editor.attr(constants.EDITOR_TYPE),
+        class: $editor.attr(constants.CLASS)
     };
 
     editor = Object.assign({}, editor, getAttrs($editor), getAttrsValidatorShow($item.attr('name')));
@@ -72,8 +79,11 @@ function editorParser($item) {
     if ($editor.is(constants.REQUIRED_ATTRIBUTE))
         editor.required = true;
 
-    if (editor.element === 'combo' && editor.required)
-        editor[ 'md-require-match' ] = true;
+    if (editor.element === 'combo') {
+        if (editor.required)
+            editor['md-require-match'] = true;
+        editor.innerTemplate = $editor.html()
+    }
 
     if (editor.element === 'select') {
         editor.options = {
@@ -166,4 +176,5 @@ export function replaceTemplate(template) {
         .replaceAll(constants.REPEAT, 'ng-repeat')
         .replaceAll(constants.IF, 'ng-if')
         .replaceAll(constants.NO_COMPILE, '')
+        .replaceAll(constants.PREFIX, '')
 }
