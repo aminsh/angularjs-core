@@ -1,0 +1,20 @@
+<md-dialog aria-label="Column chooser" flex="20">
+    <form ng-cloak novalidate name="form">
+        <div>
+            <div class="md-toolbar-tools">
+                <h3>{{'Column chooser'| translate}}</h3>
+                <span flex></span>
+                <ds-close-button on-closing="$ctrl.onClose()"></ds-close-button>
+            </div>
+            <md-divider></md-divider>
+        </div>
+        <md-dialog-content layout-padding>
+            <div layout="column" >
+                <md-checkbox class="md-primary" ng-repeat="c in $ctrl.columns | filter: {hasTitle: true}" ng-model="c.show" ng-change="$ctrl.onSelectionChanged(c)">
+                    <span ng-if="c.titleIsExpression" ds-html-compile="c.title"></span>
+                    <span ng-if="!c.titleIsExpression">{{ c.title }}</span>
+                </md-checkbox>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

@@ -1,0 +1,35 @@
+<md-autocomplete
+        ng-disabled="localDisabled"
+        md-delay="500"
+        md-clear-button="true"
+        md-input-name="autocompleteField"
+        md-input-class="ds-combo-input"
+        md-items="$item in searchQuery(searchText)"
+        md-no-cache="false"
+        md-selected-item="selectedItem"
+        md-selected-item-change="selectedItemChanged(item)"
+        md-search-text="searchText"
+        md-min-length="0"
+        placeholder="{{'Select ...'|translate}}"
+        md-floating-label="{{label}}"
+        md-autoselect
+        md-require-match="true"
+        input-aria-describedby="favoriteStateDescription">
+
+    <md-item-template>
+        <span md-highlight-text="searchText" md-highlight-flags="^i">{{$item.title}}</span>
+    </md-item-template>
+
+    <div id="msg" ng-messages="form.autocompleteField.$error" ng-if="form.autocompleteField.$dirty">
+        <div ng-message="required">{{'this_field_is_required' | translate}}</div>
+    </div>
+
+    <md-not-found>
+        <span ng-show="searchText.length > 0">"{{searchText}}" {{'Not found'|translate}}</span>
+        <span ng-show="searchText.length > 0 && hasCreate">
+            <a ng-click="create(searchText)">{{'create'|translate}}</a>
+        </span>
+    </md-not-found>
+
+</md-autocomplete>
+

@@ -1,21 +1,21 @@
-import { reportViewer } from "./reportViewer";
-import { reportConfigProvider } from "./reportConfigProvider";
-import { ReportDialog } from "./reportDialog";
-import { ReportLoader } from "./reportLoader";
+import { dsReportViewer } from "./dsReportViewer";
+import { dsReportConfigProvider } from "./dsReportConfigProvider";
+import { DsReportDialogController } from "./dsReportDialogController";
+import { DsReportLoader } from "./dsReportLoader";
+import dsReportDialogTemplate from './dsReportDialog.html';
 
-export class ReportConfiguration {
+export class Index {
     static configure(module) {
         module
-            .provider('dsReportConfig', reportConfigProvider)
-            .directive('dsReportViewer', reportViewer)
-            .controller('dsReportDialogController', ReportDialog)
+            .provider('dsReportConfig', dsReportConfigProvider)
+            .directive('dsReportViewer', dsReportViewer)
             .factory('dsReportDialog', /*@ngInject*/ (dsDialog) => {
                 return dsDialog.createForService({
-                    controller: 'dsReportDialogController',
+                    controller: DsReportDialogController,
                     controllerAs: '$ctrl',
-                    templateUrl: 'dsCore/report/reportDialog.html'
+                    template: dsReportDialogTemplate
                 });
             })
-            .service('reportLoader', ReportLoader)
+            .service('dsReportLoader', DsReportLoader)
     }
 }
