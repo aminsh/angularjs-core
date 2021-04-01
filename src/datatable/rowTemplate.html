@@ -19,7 +19,7 @@
     <input name="# column.name #"
            ng-model="# column.ngModel #"
            md-select-on-focus
-           class="form-control has-border-on-focus"
+           class="form-control has-border-on-focus # column.editor.class #"
 
     <% Object.keys(column.editor).forEach(function(key) { %>
     # key #="# column.editor[key] #"
@@ -33,7 +33,7 @@
             autocomplete="off"
             ng-model="# column.ngModel #"
             md-select-on-focus
-            class="form-control has-border-on-focus no-margins"
+            class="form-control has-border-on-focus no-margins # column.editor.class #"
 
     <% Object.keys(column.editor).forEach(function(key) { %>
     # key #="# column.editor[key] #"
@@ -44,7 +44,7 @@
     <% } else if(column.editor && column.editor.element === 'check') { %>
     <md-checkbox name="# column.name #"
            ng-model="# column.ngModel #" aria-label="grid check box"
-           class="md-primary ds-dataTable-checkbox"
+           class="md-primary ds-dataTable-checkbox # column.editor.class #"
 
     <% Object.keys(column.editor).forEach(function(key) { %>
     # key #="# column.editor[key] #"
@@ -56,7 +56,7 @@
     <ds-datepicker name="# column.name #"
            ng-model="# column.ngModel #"
            md-select-on-focus input-class="has-border-on-focus"
-           class="ds-dataTable-datepicker"
+           class="ds-dataTable-datepicker # column.editor.class #"
 
     <% Object.keys(column.editor).forEach(function(key) { %>
     # key #="# column.editor[key] #"
@@ -65,7 +65,7 @@
     ></ds-datepicker>
 
     <% } else if(column.editor && column.editor.element === 'select') { %>
-    <md-select ng-model="# column.ngModel #" class="has-border-on-focus" name="# column.name #"
+    <md-select ng-model="# column.ngModel #" class="has-border-on-focus # column.editor.class #" name="# column.name #"
         <% Object.keys(column.editor).forEach(function(key) { %>
         # key #="# column.editor[key] #"
         <%}) %>
@@ -74,7 +74,7 @@
         <md-select-header>
             <input ng-model="item.# column.name #_search" keydown-stop-propagation
                    placeholder="{{'Search'|translate}}"
-                   class="form-control has-border-on-focus">
+                   class="form-control has-border-on-focus # column.editor.class #">
         </md-select-header>
         <% } %>
         <md-option ng-repeat="# column.editor.options.repeatExpression # # column.editor.options.searchable ? '|filter:' + 'item.' + column.name + '_search' : '' #"
@@ -84,8 +84,8 @@
                 <img  ng-src="# column.editor.options.imageSrc #"
                       style="width: 45px;height: 45px;"
                       preload-image
-                      default-image="/public/images/no_image.png"
-                      fallback-image="/public/images/no_image.png"/>
+                      default-image="no_image.png"
+                      fallback-image="no_image.png"/>
                 <span class="m-r">{{# column.editor.options.display #}}</span>
             </div>
             <% } else { %>
@@ -98,7 +98,7 @@
     <% } else if(column.editor && column.editor.element === 'combo') { %>
     <ds-combobox name="# column.name #"
                  ng-model="# column.ngModel #"
-                 input-class="has-border-on-focus"
+                 input-class="has-border-on-focus # column.editor.class #"
                  on-input-focus="setCurrent(item,'# column.name #')"
 
     <% Object.keys(column.editor).forEach(function(key) { %>
@@ -111,7 +111,7 @@
 
     <md-switch name="# column.name #"
                  ng-model="# column.ngModel #"
-                 class="no-margins"
+                 class="no-margins # column.editor.class #"
 
     <% Object.keys(column.editor).forEach(function(key) { %>
     # key #="# column.editor[key] #"
