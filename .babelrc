@@ -3,6 +3,7 @@
         "@babel/env"
     ],
     "plugins": [
-        "angularjs-annotate"
+        "angularjs-annotate",
+        "transform-html-import-require-to-string"
     ]
 }
