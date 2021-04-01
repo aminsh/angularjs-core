@@ -83,6 +83,19 @@ gulp.task('concat', function () {
         .pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('ngdocs', [], function () {
+    var gulpDocs = require('gulp-ngdocs');
+    var options = {
+        html5Mode: true,
+        title: "STORM UI Core Documentation",
+        image: "./logo.png",
+        startPage: '/'
+    }
+    return gulp.src('./src/**/*.js')
+        .pipe(gulpDocs.process(options))
+        .pipe(gulp.dest('./docs'));
+});
+
 gulp.task('default', [
     'build-sass',
     'build-template',
