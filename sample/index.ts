@@ -7,7 +7,7 @@ interface ICtrlScope {
 
 angular.module('app', ['ds-core'])
     .controller('ctrl', function ($scope: ICtrlScope) {
-        $scope.title = 'Amin';
+        $scope.title = 'AminSh';
     });
 
  
