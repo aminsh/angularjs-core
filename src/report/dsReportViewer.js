@@ -2,7 +2,7 @@ import { defaultViewerConfig, addVariable } from "./dsReportTools";
 import { Guid } from "../utils";
 
 /* @ngInject */
-export function dsReportViewer(dsReportConfig, dsEnvironment, $timeout) {
+export function dsReportViewer(dsReportConfig, dsEnvironment, $timeout, dsReportLoader) {
     return {
         restrict: 'E',
         template: '<div id="contentViewer" style="direction: ltr"></div>',
@@ -10,38 +10,42 @@ export function dsReportViewer(dsReportConfig, dsEnvironment, $timeout) {
             options: '='
         },
         link: function (scope, element, attrs) {
-            const id = Guid.new();
-            const report = new Stimulsoft.Report.StiReport();
-            const data = {};
+            dsReportLoader.load().then(init);
 
-            const config = defaultViewerConfig();
-            if (typeof dsReportConfig.viewerConfig === 'function')
-                dsReportConfig.viewerConfig(config);
+            function init() {
+                const id = Guid.new();
+                const report = new Stimulsoft.Report.StiReport();
+                const data = {};
 
-            const viewer = new Stimulsoft.Viewer.StiViewer(config, "StiViewer" + id, false);
+                const config = defaultViewerConfig();
+                if (typeof dsReportConfig.viewerConfig === 'function')
+                    dsReportConfig.viewerConfig(config);
 
-            $(element).find('div').attr('id', id);
+                const viewer = new Stimulsoft.Viewer.StiViewer(config, "StiViewer" + id, false);
 
-            report.loadFile(`${ dsReportConfig.baseURL }/${ scope.options.filename }?token=${ dsEnvironment.TENANT_KEY }`);
-            $timeout(() => {
-                viewer.renderHtml(id);
-            }, 500);
+                $(element).find('div').attr('id', id);
+
+                report.loadFile(`${ dsReportConfig.baseURL }/${ scope.options.filename }?token=${ dsEnvironment.TENANT_KEY }`);
+                $timeout(() => {
+                    viewer.renderHtml(id);
+                }, 500);
 
 
-            dsReportConfig.variables.forEach(variable => {
-                report.dictionary.variables.add(addVariable(variable));
-            });
+                dsReportConfig.variables.forEach(variable => {
+                    report.dictionary.variables.add(addVariable(variable));
+                });
 
-            const reportVariables = scope[scope.options.variables] || [];
+                const reportVariables = scope[scope.options.variables] || [];
 
-            reportVariables.forEach(variable => {
-                report.dictionary.variables.add(addVariable(variable));
-            });
+                reportVariables.forEach(variable => {
+                    report.dictionary.variables.add(addVariable(variable));
+                });
 
-            data['data'] = scope.options.data;
+                data['data'] = scope.options.data;
 
-            report.regData("data", "data", data);
-            viewer.report = report;
+                report.regData("data", "data", data);
+                viewer.report = report;
+            }
         }
     };
 }
