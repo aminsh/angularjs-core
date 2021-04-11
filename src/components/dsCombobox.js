@@ -37,7 +37,6 @@ export function dsCombobox(dsHttpRequest, dsPromise, $timeout, $window) {
         require: 'ngModel',
         scope: {
             onChanged: '&onItemChanged',
-            //onRemoved: '&onItemChanged',
             onBound: '&onItemBound',
             onCreate: '&onCreate',
             displayField: '@',

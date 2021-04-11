@@ -7,7 +7,7 @@
         md-items="$item in searchQuery(searchText)"
         md-no-cache="false"
         md-selected-item="selectedItem"
-        md-selected-item-change="selectedItemChanged(item)"
+        md-selected-item-change="selectedItemChanged($item)"
         md-search-text="searchText"
         md-min-length="0"
         placeholder="{{'Select ...'|translate}}"
