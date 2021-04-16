@@ -15,6 +15,8 @@ export function dsHtmlCompile($compile) {
         restrict: 'A',
         link: function (scope, element, attrs) {
             scope.$watch(attrs['dsHtmlCompile'], function (newValue, oldValue) {
+                if (!newValue)
+                    return element.empty();
                 element.html(newValue.replaceAll('no-compile-', ''));
                 $compile(element.contents())(scope);
             });

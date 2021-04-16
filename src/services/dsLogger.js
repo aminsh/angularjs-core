@@ -2,8 +2,8 @@ import swal from "sweetalert";
 
 export class DsLogger {
     /* @ngInject */
-    constructor(dsTranslate, notify) {
-        this.notify = notify;
+    constructor(dsTranslate, dsNotify) {
+        this.dsNotify = dsNotify;
         this.dsTranslate = dsTranslate;
     }
 
@@ -16,7 +16,7 @@ export class DsLogger {
     }
 
     success(message) {
-        this.notify.show(message || this.dsTranslate('done'), { success: true });
+        this.dsNotify.show(message || this.dsTranslate('done'), { success: true });
     }
 
     info(message) {
