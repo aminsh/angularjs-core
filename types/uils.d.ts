@@ -32,3 +32,7 @@ export declare class ClassTransformer {
     static map<T>(ctor: IClassType<T>, data: T): T;
     static clone<T>(data: T): T;
 }
+
+export declare function camelToKebab(str): string;
+
+export declare function kebabToCamel(input): string;

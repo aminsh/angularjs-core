@@ -60,3 +60,11 @@ export function camelize(str) {
         return index === 0 ? word.toLowerCase() : word.toUpperCase();
     }).replace(/\s+/g, '');
 }
+
+export function camelToKebab(str) {
+    return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+}
+
+export function kebabToCamel(input) {
+    return input.replace(/(-\w)/g, function (m) { return m[1].toUpperCase(); });
+}

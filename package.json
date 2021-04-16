@@ -1,6 +1,6 @@
 {
   "name": "storm-ui-core",
-  "version": "1.0.52",
+  "version": "1.0.53",
   "description": "",
   "types": "types/index.d.ts",
   "module": "index.js",
