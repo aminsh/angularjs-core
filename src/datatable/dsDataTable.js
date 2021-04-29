@@ -39,6 +39,7 @@ export function dsDataTable($compile, $rootScope, $timeout, dsGridColumnChooser)
         compile(tElement, tAttrs, transclude) {
             return function link(scope, element, attrs) {
                 scope.dataTableId = Guid.new();
+                scope.toolbarEnabled = !attrs.hasOwnProperty('disableToolbar');
 
                 scope.local_removable = scope.removable === undefined
                     ? true
