@@ -36,3 +36,7 @@ export declare class ClassTransformer {
 export declare function camelToKebab(str): string;
 
 export declare function kebabToCamel(input): string;
+
+export declare function digitToWord(number: Number): string;
+
+export declare function dateToWord(date: string): string;

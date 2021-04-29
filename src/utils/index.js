@@ -5,3 +5,4 @@ export * from './ODataQueryBuilder';
 export * from './exceptions';
 export * from './collection';
 export * from './object';
+export * from './date';
