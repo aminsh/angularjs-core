@@ -9,6 +9,7 @@ import { DsLogger } from "./dsLogger";
 import { DsFormService } from "./dsFormService";
 import { dsConfirm } from "./dsConfirm";
 import loadingTemplate from './dsLoading.html';
+import { dsPrompt } from "./dsPrompt";
 
 
 export { DsDialog, registerDialog, DialogProvider } from './dsDialog';
@@ -33,5 +34,6 @@ export class Index {
             .factory('dsTranslateLoader', dsTranslateLoader)
             .factory('dsTranslate', dsTranslate)
             .factory('dsConfirm', dsConfirm)
+            .factory('dsPrompt', dsPrompt)
     }
 }
