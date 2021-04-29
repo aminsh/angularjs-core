@@ -1,0 +1,21 @@
+<md-chips ng-model="$multiSelect.selectedItems"
+          md-require-match="true"
+          ng-change="$multiSelect.onChanged($multiSelect.selectedItems)"
+          md-autocomplete-snap
+          md-transform-chip="$multiSelect.transform($chip)"
+          input-aria-label="Multi Select">
+    <md-autocomplete
+            md-selected-item="$multiSelect.selectedItem"
+            md-search-text="$multiSelect.searchText"
+            md-items="$item in $multiSelect.search($multiSelect.searchText)"
+            md-item-text="..."
+            md-min-length="0"
+            input-aria-describedby="autocompleteTitle"
+            placeholder="{{'Type ...'|translate}}"
+            md-autoselect>
+        <span md-highlight-text="$multiSelect.searchText">...</span>
+    </md-autocomplete>
+    <md-chip-template class="p">
+        <span>...</span>
+    </md-chip-template>
+</md-chips>
