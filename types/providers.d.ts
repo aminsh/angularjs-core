@@ -10,6 +10,7 @@ export interface IEnvironment {
     TENANT_KEY?: string;
     USER_KEY?: string;
     FISCAL_PERIOD?: string;
+    SOCKET_URL?: string
 }
 
 

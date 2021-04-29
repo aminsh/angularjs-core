@@ -31,7 +31,7 @@ export interface IODataQueryBuilder<TResponse> {
 
     useInlineCount(): IODataQueryBuilder<TResponse>;
 
-    setQueryString(qs: string): IODataQueryBuilder<TResponse>;
+    setQueryString(qs: any): IODataQueryBuilder<TResponse>;
 
     executeAsKendo(parameters: any): Promise<IKendoResponse<TResponse>>;
 

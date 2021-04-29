@@ -25,6 +25,8 @@ export const dsTranslateDefaultDictionary = {
         actions: 'عملیات',
         export_to_excel: 'خروجی اکسل',
         row_alternation: 'ردیف های متمایز',
-        column_lines: 'خطوط ستون'
+        column_lines: 'خطوط ستون',
+        description: 'شرح',
+        description_about_changes: 'شرح تغییرات انجام شده'
     }
 }
