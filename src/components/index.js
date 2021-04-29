@@ -15,6 +15,8 @@ import { dsContentLoading } from "./dsContentLoading";
 import { dsFullscreenButton } from "./dsFullscreenButton";
 import { dsCloseButton } from "./dsCloseButton";
 import { dsHtmlCompile } from "./dsHtmlCompile";
+import { dsAccordionComponent, dsAccordionGroupComponent } from "./dsAccordion";
+import { dsMultiSelectComponent } from "./dsMultiSelect";
 
 export class Index {
     static configure(module) {
@@ -36,6 +38,9 @@ export class Index {
             .directive('dsFullscreenButton', dsFullscreenButton)
             .directive('dsCloseButton', dsCloseButton)
             .directive('dsHtmlCompile', dsHtmlCompile)
+            .component('dsMultiSelect', dsMultiSelectComponent)
+            .component('dsAccordion', dsAccordionComponent)
+            .component('dsAccordionGroup', dsAccordionGroupComponent)
             .factory('dsPdfViewer', dsPdfViewer)
             .service('dsNotify', DsNotifyService)
             .config(dsNumberConfig)

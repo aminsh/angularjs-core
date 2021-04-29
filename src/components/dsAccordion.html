@@ -1,0 +1,18 @@
+<div>
+    <div uib-accordion-group layout="column"
+         class="ds-panel {{ $dsAccordionGroup.dsAccordionCtrl.groupClass }}"
+         is-open="$dsAccordionGroup.isOpen">
+        <uib-accordion-heading>
+           <div>
+               <md-icon md-svg-src="md-down" aria-label="expand dialog" ng-show="$dsAccordionGroup.isOpen"></md-icon>
+               <md-icon md-svg-src="md-expand-left" aria-label="expand dialog" ng-show="!$dsAccordionGroup.isOpen"></md-icon>
+               <span id="heading-transclude" ng-transclude="heading"></span>
+               <span id="heading" style="font-size: 15px">{{ $dsAccordionGroup.heading }}</span>
+           </div>
+        </uib-accordion-heading>
+
+        <div id="default-transclude" ng-transclude ng-if="$dsAccordionGroup.canInit"></div>
+
+        <div id="body-transclude" ng-transclude="body" ng-if="$dsAccordionGroup.canInit"></div>
+    </div>
+</div>

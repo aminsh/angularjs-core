@@ -1,0 +1,12 @@
+.panel.ds-panel {
+  background-color: transparent;
+}
+
+.ds-panel > .panel-collapse > .panel-body {
+  padding-right: 40px;
+  border-top: unset !important;
+  min-height: unset !important;
+  @media (max-width: 768px) {
+    padding-right: 0;
+  }
+}
