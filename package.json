@@ -1,6 +1,6 @@
 {
   "name": "storm-ui-core",
-  "version": "1.0.56",
+  "version": "1.0.62",
   "description": "",
   "types": "types/index.d.ts",
   "module": "index.js",
@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist coverage",
-    "build": "npm run clean && rollup -c && copyfiles types/* style/* lib/* package.json dist/ && rimraf dist/temp && gulp ngdocs",
+    "build": "npm run clean && rollup -c && copyfiles types/* style/* lib/* package.json dist/ && rimraf dist/temp",
     "uglify": "for f in dist/*.js; do ./node_modules/uglify-es/bin/uglifyjs $f --compress drop_console --mangle --output ${f%.js}.min.js; done",
     "release": "standard-version",
     "postrelease": "git push origin master --follow-tags",

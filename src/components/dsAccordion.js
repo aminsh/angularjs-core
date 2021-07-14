@@ -23,8 +23,11 @@ class dsAccordionGroupController {
     /* @ngInject */
     constructor($scope, $attrs) {
         this.$scope = $scope;
+        this.$attrs = $attrs;
         this.isOpen = null;
         this.dsAccordionCtrl = null;
+        this.showHandle = null;
+        this._showHandle = true;
         this.canInit = !$attrs.hasOwnProperty('initOnClick');
     }
 
@@ -35,6 +38,9 @@ class dsAccordionGroupController {
                 if (newVal)
                     this.canInit = true;
             });
+
+        if(this.$attrs.hasOwnProperty('showHandle'))
+            this._showHandle = this.showHandle;
     }
 }
 /**
@@ -56,7 +62,8 @@ export const dsAccordionGroupComponent = {
         'body': '?dsAccordionGroupBody'
     },
     bindings: {
-        isOpen: '<',
+        isOpen: '=',
+        showHandle: '<',
         heading: '@',
         initOnClick: '<'
     }

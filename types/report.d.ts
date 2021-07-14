@@ -1,7 +1,7 @@
 export interface IReportDialogParameters {
     title?: string;
     data: any,
-    filename: string,
+    fileName: string,
     variables?: IReportVariable[]
 }
 

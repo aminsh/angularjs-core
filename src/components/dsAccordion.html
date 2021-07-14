@@ -4,8 +4,8 @@
          is-open="$dsAccordionGroup.isOpen">
         <uib-accordion-heading>
            <div>
-               <md-icon md-svg-src="md-down" aria-label="expand dialog" ng-show="$dsAccordionGroup.isOpen"></md-icon>
-               <md-icon md-svg-src="md-expand-left" aria-label="expand dialog" ng-show="!$dsAccordionGroup.isOpen"></md-icon>
+               <md-icon md-svg-src="md-down" aria-label="expand handle" ng-show="$dsAccordionGroup._showHandle && $dsAccordionGroup.isOpen"></md-icon>
+               <md-icon md-svg-src="md-expand-left" aria-label="expand handle" ng-show="$dsAccordionGroup._showHandle && !$dsAccordionGroup.isOpen"></md-icon>
                <span id="heading-transclude" ng-transclude="heading"></span>
                <span id="heading" style="font-size: 15px">{{ $dsAccordionGroup.heading }}</span>
            </div>

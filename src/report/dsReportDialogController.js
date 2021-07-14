@@ -5,7 +5,7 @@ export class DsReportDialogController {
         this.options = {
             title: data.title,
             data: data.data,
-            filename: data.filename,
+            filename: data.fileName,
             variables: data.variables
         };
 

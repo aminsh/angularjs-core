@@ -49,9 +49,7 @@ export function dsDatepicker() {
             );
 
             scope.$watch('localDate', newValue => {
-                    if (!newValue)
-                        return;
-                    ngModel.$setViewValue(getDate(scope.localDate))
+                    ngModel.$setViewValue(newValue ? getDate(scope.localDate) : null);
                 }
             );
 

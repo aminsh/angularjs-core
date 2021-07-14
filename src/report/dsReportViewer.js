@@ -35,7 +35,7 @@ export function dsReportViewer(dsReportConfig, dsEnvironment, $timeout, dsReport
                     report.dictionary.variables.add(addVariable(variable));
                 });
 
-                const reportVariables = scope[scope.options.variables] || [];
+                const reportVariables = scope.options.variables || [];
 
                 reportVariables.forEach(variable => {
                     report.dictionary.variables.add(addVariable(variable));

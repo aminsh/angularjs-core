@@ -40,7 +40,7 @@ export class DsMultiSelect {
         );
     }
 
-    async search(query) {
+    search(query) {
         const parameters = {
             filter: {
                 logic: 'and',
@@ -57,14 +57,15 @@ export class DsMultiSelect {
             skip: 0
         };
 
-        const result = await this.dsPromise.resolve(this.dataSource.find(parameters));
-
-        this.$apply();
-
-        return result.data;
+        return this.dsPromise.create(resolve => {
+            this.dsPromise.resolve(this.dataSource.find(parameters))
+                .then(result => {
+                    resolve(result.data);
+                });
+        });
     }
 
-    async find(value) {
+    find(value) {
         const parameters = {
             filter: {
                 logic: 'and',
@@ -79,9 +80,12 @@ export class DsMultiSelect {
             sort: []
         };
 
-        const result = await this.dsPromise.resolve(this.dataSource.find(parameters));
-        this.$apply();
-        return result.data;
+        return this.dsPromise.create(resolve => {
+            this.dsPromise.resolve(this.dataSource.find(parameters))
+                .then(result => {
+                    resolve(result.data);
+                });
+        });
     }
 
     onChanged(selectedItems) {
