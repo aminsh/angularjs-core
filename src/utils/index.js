@@ -6,3 +6,4 @@ export * from './exceptions';
 export * from './collection';
 export * from './object';
 export * from './date';
+export * from './persianDate';

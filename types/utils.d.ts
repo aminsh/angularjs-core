@@ -30,6 +30,7 @@ export declare class Guid {
 
 export declare class ClassTransformer {
     static map<T>(ctor: IClassType<T>, data: T): T;
+
     static clone<T>(data: T): T;
 }
 
@@ -40,3 +41,11 @@ export declare function kebabToCamel(input): string;
 export declare function digitToWord(number: Number): string;
 
 export declare function dateToWord(date: string): string;
+
+export declare class PersianDate {
+    static current(): string;
+
+    static getDate(date: Date): string;
+
+    static toWord(date: string): string;
+}
