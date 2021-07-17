@@ -128,6 +128,12 @@ export class ODataQueryBuilder {
         return instance;
     }
 
+    disablePaging() {
+        let instance = this.clone();
+        instance.config.paging = false;
+        return instance;
+    }
+
     _getHeader(header) {
         const base = { "api-caller": "STORM-Dashboard", "Cache-Control": "no-cache" };
         return Object.assign({}, base, header);
@@ -285,7 +291,7 @@ export class ODataQueryBuilder {
     executeAsKendo(parameters) {
         const instance = this.clone();
 
-        if(parameters.hasOwnProperty('paging'))
+        if (parameters.hasOwnProperty('paging'))
             instance.paging = parameters.paging;
 
         return this.promise.create((resolve, reject) => {

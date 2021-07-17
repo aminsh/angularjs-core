@@ -29,6 +29,8 @@ export interface IODataQueryBuilder<TResponse> {
 
     skip(number: number): IODataQueryBuilder<TResponse>;
 
+    disablePaging(): IODataQueryBuilder<TResponse>;
+
     useInlineCount(): IODataQueryBuilder<TResponse>;
 
     setQueryString(qs: any): IODataQueryBuilder<TResponse>;
