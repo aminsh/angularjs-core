@@ -33,6 +33,7 @@ export class ODataQueryBuilder {
             single: false,
             where: [],
             orderBy: [],
+            select: null,
             include: [],
             take: 20,
             skip: 0,
@@ -78,6 +79,12 @@ export class ODataQueryBuilder {
                 })
                 .catch(e => reject(e));
         });
+    }
+
+    select(fields) {
+        let instance = this.clone();
+        instance.config.select = fields;
+        return instance;
     }
 
     include(association) {
@@ -151,6 +158,9 @@ export class ODataQueryBuilder {
             if (config.skip)
                 query.$skip = config.skip;
         }
+
+        if (config.select)
+            query.$select = config.select;
 
         if (config.inlineCount)
             query.$count = true;

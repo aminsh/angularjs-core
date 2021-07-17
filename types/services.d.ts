@@ -15,6 +15,8 @@ export interface IODataQueryBuilder<TResponse> {
 
     firstOrDefault(field: string, operator: string, value: any, defaultValue?: any): Promise<TResponse>;
 
+    select(fields: string): IODataQueryBuilder<TResponse>;
+
     include(association): IODataQueryBuilder<TResponse>;
 
     where(field: string, operator: string, value: any): IODataQueryBuilder<TResponse>;
