@@ -27,6 +27,9 @@ export const dsTranslateDefaultDictionary = {
         row_alternation: 'ردیف های متمایز',
         column_lines: 'خطوط ستون',
         description: 'شرح',
-        description_about_changes: 'شرح تغییرات انجام شده'
+        description_about_changes: 'شرح تغییرات انجام شده',
+        confirm: 'تایید',
+        cancel: 'انصراف',
+        title: 'عنوان'
     }
 }

@@ -108,11 +108,19 @@ export declare enum DialogProvider {
 
 export type Translate = (key: string) => string
 
-export type IConfirmDialog = (params: IConfirmOption) => Promise<boolean>
+export type IConfirmDialog = (params: IConfirmOption) => Promise<boolean>;
 
 export interface IConfirmOption {
     title?: string,
     message?: string
+}
+
+export type IPromptDialog = (params: IPromptOptions) => Promise<string>;
+
+export interface IPromptOptions {
+    title?: string;
+    message?: string;
+    defaultValue?: string;
 }
 
 export interface Logger {

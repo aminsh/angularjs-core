@@ -1,16 +1,16 @@
 /* @ngInject */
-export function dsPrompt(translate, dsPromise, $mdDialog) {
+export function dsPrompt(dsTranslate, dsPromise, $mdDialog) {
     return option => {
         return dsPromise.create((resolve, reject) => {
             let confirm = $mdDialog.prompt()
                 .title(option.title)
                 .textContent(option.text)
-                .placeholder(translate('Title'))
-                .ariaLabel('Title')
+                .placeholder(dsTranslate('title'))
+                .ariaLabel('title')
                 .initialValue(option.defaultValue)
                 .required(true)
-                .ok(translate('Confirm'))
-                .cancel(translate('Cancel'));
+                .ok(dsTranslate('confirm'))
+                .cancel(dsTranslate('cancel'));
 
             confirm._options.multiple = true;
 
