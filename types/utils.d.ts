@@ -6,7 +6,7 @@ export interface Array<T> {
     toArray(): Array<T>
 }
 
-export enum keyboard {
+export declare enum keyboard {
     ENTER = 13,
     SHIFT = 16,
     ARROW_RIGHT = 39,
