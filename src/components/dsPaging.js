@@ -24,7 +24,8 @@ export function dsPaging() {
         scope: {
             'setPage': '&',
             'total': '=',
-            'options': '='
+            'options': '=',
+            'ngDisabled': '='
         },
         link: (scope, element, attrs) => {
             scope.currentPage = 1;

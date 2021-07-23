@@ -37,3 +37,10 @@
     border-bottom: none;
   }
 }
+
+.ds-disabled-content {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
