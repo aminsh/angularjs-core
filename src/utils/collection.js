@@ -16,6 +16,9 @@ export class Collection {
 
     constructor() {
         this.changeSet = [];
+        this.forEach = (action) => {
+            this._data.forEach((e, i) => action(e, i));
+        }
     }
 
     enableChangeTracking() {

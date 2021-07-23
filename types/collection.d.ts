@@ -3,6 +3,8 @@ import { Constructor, IDialogOptions } from './services';
 export interface ICollection<TCollection> {
     toArray(): TCollection[];
 
+    forEach(action: (item: TCollection, index: number) => void);
+
     push(item: TCollection): void;
 
     remove(item: TCollection): void;
