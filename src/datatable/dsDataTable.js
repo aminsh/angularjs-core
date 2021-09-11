@@ -10,7 +10,7 @@ import footerTemplate from './footerTemplate.html';
 import rowTemplate from './rowTemplate.html';
 
 /* @ngInject */
-export function dsDataTable($compile, $rootScope, $timeout, dsGridColumnChooser) {
+export function dsDataTable($compile, $rootScope, $timeout, dsGridColumnChooser, dsEntitySetFactory) {
     return {
         restrict: 'E',
         transclude: {
@@ -33,7 +33,8 @@ export function dsDataTable($compile, $rootScope, $timeout, dsGridColumnChooser)
             onItemRemoved: '&',
             onItemCreated: '&',
             onKeyPress: '&',
-            onInit: '&'
+            onInit: '&',
+            trackable: '@'
         },
         template,
         compile(tElement, tAttrs, transclude) {
@@ -107,6 +108,8 @@ export function dsDataTable($compile, $rootScope, $timeout, dsGridColumnChooser)
 
                     scope.items.remove(item);
 
+                    $dataTable.entitySet && $dataTable.entitySet.remove(item);
+
                     scope.onItemRemoved({ $item: item });
                 };
 
@@ -120,6 +123,10 @@ export function dsDataTable($compile, $rootScope, $timeout, dsGridColumnChooser)
 
                     if (instance)
                         item = instance;
+
+                    if ($dataTable.entitySet) {
+                        item = $dataTable.entitySet.add(item);
+                    }
 
                     scope.items.push(item);
 
@@ -336,7 +343,25 @@ export function dsDataTable($compile, $rootScope, $timeout, dsGridColumnChooser)
                         $timeout(() => {
                             setFocus(item.id, element);
                         }, 500);
-                    }
+                    },
+                    commit: () => {
+                        $dataTable.entitySet = dsEntitySetFactory.create(scope.trackable);
+                    },
+                    setItems: (items) => {
+                        if (!(items && items.length > 0))
+                            return;
+
+                        if (!scope.trackable)
+                            return;
+
+                        $dataTable.entitySet = dsEntitySetFactory.create(scope.trackable);
+                        scope.items = $dataTable.entitySet.attach(items);
+                    },
+                    addItem: (item) => {
+                        $dataTable.entitySet = dsEntitySetFactory.create(scope.trackable);
+                        scope.items.push($dataTable.entitySet.add(item));
+                    },
+                    setCurrent: current => scope.setCurrent(current)
                 }
 
                 scope.onInit({ $dataTable });

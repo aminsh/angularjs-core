@@ -1,6 +1,8 @@
 import { dsDataTable } from "./dsDataTable";
 import { DsGridColumnChooser } from "./dsGridColumnChooser";
 import gridColumnChooserTemplate from './dsGridColumnChooser.html';
+import { DsEntitySetFactory } from "./dsEntitySetFactory";
+import { dsEntityConfigurationProvider } from "./dsEntityConfigurationProvider";
 
 export class Index {
     static configure(module) {
@@ -12,6 +14,8 @@ export class Index {
                     controllerAs: '$ctrl',
                     template: gridColumnChooserTemplate
                 });
-            });
+            })
+            .service('dsEntitySetFactory', DsEntitySetFactory)
+            .provider('dsEntityConfiguration', dsEntityConfigurationProvider)
     }
 }
