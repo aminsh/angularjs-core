@@ -1,6 +1,6 @@
 {
   "name": "storm-ui-core",
-  "version": "1.0.69",
+  "version": "1.0.75",
   "description": "",
   "types": "types/index.d.ts",
   "module": "index.js",
@@ -39,7 +39,8 @@
     "sweetalert": "^2.1.2",
     "metismenu": "^2.7.0",
     "viewerjs": "^1.9.0",
-    "class-transformer": "^0.3.1"
+    "class-transformer": "^0.3.1",
+    "js-data": "^3.0.10"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
