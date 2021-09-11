@@ -22,6 +22,7 @@ export class ODataQueryBuilder {
         instance.config.take = this.config.take;
         instance.config.skip = this.config.skip;
         instance.config.queryString = this.config.queryString;
+        instance.config.inlineCount = this.config.inlineCount;
 
         return instance;
     }

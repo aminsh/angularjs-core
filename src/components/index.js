@@ -39,7 +39,7 @@ export class Index {
             .directive('dsFullscreenButton', dsFullscreenButton)
             .directive('dsCloseButton', dsCloseButton)
             .directive('dsHtmlCompile', dsHtmlCompile)
-            .directive('dsDisabledContent', dsContentDisabled)
+            .directive('dsContentDisabled', dsContentDisabled)
             .component('dsMultiSelect', dsMultiSelectComponent)
             .component('dsAccordion', dsAccordionComponent)
             .component('dsAccordionGroup', dsAccordionGroupComponent)

@@ -154,7 +154,7 @@ export interface IFormService {
 }
 
 export interface IPromise {
-    create(handler: (resolve: (result: any) => void, reject: (e: any) => void) => void): Promise<void>;
+    create<T>(handler: (resolve: (result: T) => void, reject: (e: any) => void) => void): Promise<T>;
 
     all(promises: Promise<any>[]): void;
 

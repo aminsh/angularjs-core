@@ -6,9 +6,9 @@ export function dsContentDisabled() {
 
             scope.$watch(contentDisabled, (newValue) => {
                 if (newValue)
-                    $(element).addClass('ds-disabled-content');
+                    $(element).addClass('ds-content-disabled');
                 else
-                    $(element).removeClass('ds-disabled-content');
+                    $(element).removeClass('ds-content-disabled');
             });
         }
     };
