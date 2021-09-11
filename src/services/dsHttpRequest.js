@@ -98,6 +98,18 @@ export class DsHttpRequest {
         });
     }
 
+    patch(url, data, options) {
+        options = options || {};
+        return this.dsPromise.create((resolve, reject) => {
+            this.$http.patch(url, data, {
+                headers: this.getDefaultHeaders(options),
+                params: this.getDefaultQuery(options)
+            })
+                .then(result => resolve(result.data))
+                .catch(error => this.errorHandler(error, reject));
+        });
+    }
+
     delete(url, options) {
         options = options || {};
         return this.dsPromise.create((resolve, reject) => {
