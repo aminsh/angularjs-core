@@ -30,6 +30,9 @@ export const dsTranslateDefaultDictionary = {
         description_about_changes: 'شرح تغییرات انجام شده',
         confirm: 'تایید',
         cancel: 'انصراف',
-        title: 'عنوان'
+        title: 'عنوان',
+        not_found: '',
+        do_you_want: 'آیا مایل هستید',
+        to_be_created: 'ایجاد شود ؟'
     }
 }

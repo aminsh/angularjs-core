@@ -50,7 +50,8 @@ export function dsCombobox(dsHttpRequest, dsPromise, $timeout, $window) {
             dataSource: '=',
             displayExpression: '@',
             filterExpression: '@',
-            filterOperator: '@'
+            filterOperator: '@',
+            ngRequired: '='
         },
         template: function (element, attrs) {
             attrs['$userTemplate'] = element.clone();
@@ -62,13 +63,13 @@ export function dsCombobox(dsHttpRequest, dsPromise, $timeout, $window) {
             let mdAutocomplete = $('md-autocomplete', tElement),
                 itemTemplate = $('md-item-template', mdAutocomplete);
 
-            mdAutocomplete.attr('md-item-text', `$item.${tAttrs.displayField}`);
+            mdAutocomplete.attr('md-item-text', `$item.${ tAttrs.displayField }`);
 
             if (tAttrs.hasOwnProperty('required'))
                 mdAutocomplete.attr('required', '');
 
             if (tAttrs.hasOwnProperty('ngRequired'))
-                mdAutocomplete.attr('ng-required', tAttrs['ngRequired']);
+                mdAutocomplete.attr('ng-required', 'ngRequired');
 
             let inputId = Guid.new();
 
@@ -88,15 +89,17 @@ export function dsCombobox(dsHttpRequest, dsPromise, $timeout, $window) {
             }
 
             let msg = $('#msg', tElement);
-            msg.attr('ng-messages', `form.${tAttrs.name}.$error`);
-            msg.attr('ng-if', `form.${tAttrs.name}.$dirty`);
+            msg.attr('ng-messages', `form.${ tAttrs.name }.$error`);
+            msg.attr('ng-if', `form.${ tAttrs.name }.$dirty`);
 
             if (!tAttrs.hasOwnProperty('label'))
                 mdAutocomplete.removeAttr('md-floating-label');
 
+
             const $dsItemTemplate = $userTemplate.find('ds-item-template');
+
             if($dsItemTemplate.length > 0) {
-                itemTemplate.html($dsItemTemplate.html());
+               itemTemplate.html($dsItemTemplate.html());
             }
             else {
                 $('span', itemTemplate).text(`{{$item.${ tAttrs.displayField }}}`);
@@ -113,7 +116,7 @@ export function dsCombobox(dsHttpRequest, dsPromise, $timeout, $window) {
                     oDataQuery = scope.option.oDataQuery;
 
                 $timeout(() => {
-                    const $input = $(`#${inputId}`, element);
+                    const $input = $(`#${ inputId }`, element);
 
                     if (attrs.inputClass)
                         $input.addClass(attrs.inputClass);
@@ -137,6 +140,12 @@ export function dsCombobox(dsHttpRequest, dsPromise, $timeout, $window) {
 
                 scope.localDisabled = false;
                 scope.hasCreate = attrs.hasOwnProperty('onCreate');
+
+                if(attrs.hasOwnProperty('onCreate')) {
+                    let $elem = $(element).find('md-virtual-repeat-container');
+                    $elem.addClass('has-create');
+                    $(element[0]).attr('has-create', true);
+                }
 
                 scope.create = text => scope.onCreate({ $search: text });
 
@@ -213,7 +222,7 @@ export function dsCombobox(dsHttpRequest, dsPromise, $timeout, $window) {
 
                     if (dataSource) {
                         return dsPromise.create(resolve => {
-                            dataSource.filter(`it.${attrs.valueField} == '${value}'`)
+                            dataSource.filter(`it.${ attrs.valueField } == '${ value }'`)
                                 .toArray()
                                 .then(result => {
                                     result.forEach(e => {
@@ -245,11 +254,11 @@ export function dsCombobox(dsHttpRequest, dsPromise, $timeout, $window) {
                         filter: {
                             logic: 'and',
                             filters: [
-                                ...(query ? [{
+                                ...(query ? [ {
                                     field: attrs.displayField,
                                     operator: attrs.filterOperator ? attrs.filterOperator : 'contains',
                                     value: query
-                                }] : []),
+                                } ] : []),
                                 ...defaultFilter
                             ]
                         },
@@ -277,10 +286,10 @@ export function dsCombobox(dsHttpRequest, dsPromise, $timeout, $window) {
                                 filter: {
                                     logic: 'and',
                                     filters: [
-                                        ...(query ? [{
+                                        ...(query ? [ {
                                             operator: 'raw',
                                             expression: _.template(attrs.filterExpression)({ search: query })
-                                        }] : []),
+                                        } ] : []),
                                         ...defaultFilter
                                     ]
                                 },

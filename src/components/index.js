@@ -18,6 +18,7 @@ import { dsHtmlCompile } from "./dsHtmlCompile";
 import { dsAccordionComponent, dsAccordionGroupComponent } from "./dsAccordion";
 import { dsMultiSelectComponent } from "./dsMultiSelect";
 import { dsContentDisabled } from "./dsContentDisabled";
+import { dsTooltip } from "./dsTooltip";
 
 export class Index {
     static configure(module) {
@@ -40,6 +41,7 @@ export class Index {
             .directive('dsCloseButton', dsCloseButton)
             .directive('dsHtmlCompile', dsHtmlCompile)
             .directive('dsContentDisabled', dsContentDisabled)
+            .directive('dsTooltip', dsTooltip)
             .component('dsMultiSelect', dsMultiSelectComponent)
             .component('dsAccordion', dsAccordionComponent)
             .component('dsAccordionGroup', dsAccordionGroupComponent)

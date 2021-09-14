@@ -25,11 +25,18 @@
     </div>
 
     <md-not-found>
-        <span ng-show="searchText.length > 0">"{{searchText}}" {{'Not found'|translate}}</span>
-        <span ng-show="searchText.length > 0 && hasCreate">
-            <a ng-click="create(searchText)">{{'create'|translate}}</a>
+        <span ng-show="searchText.length > 0"> <b>"{{searchText}}"</b> {{'Not found'|translate}}</span>
+        <span style="display: block" ng-show="searchText.length > 0 && hasCreate">{{'do_you_want'|translate}} <b>"{{searchText}}"</b> {{'to_be_created'|translate}}</span>
+        <span style="display: block" ng-show="searchText.length > 0 && hasCreate">
+              <a class="not-found"><md-button type="md-raised md-button" ng-click="create(searchText)">{{'create'|translate}}</md-button></a>
         </span>
     </md-not-found>
-
 </md-autocomplete>
+<md-button tabindex="0"
+           class="has-create md-icon-button"
+           ng-if="!(searchText.length > 0) && hasCreate"
+           aria-label="create Input"
+           ng-click="create(searchText)"
+           ds-tooltip="{{'New' | translate}}"><md-icon md-svg-src="md-add"></md-icon>
+</md-button>
 

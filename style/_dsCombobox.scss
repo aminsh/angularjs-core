@@ -1,0 +1,52 @@
+
+md-virtual-repeat-container.md-not-found.has-create {
+  height: 111px !important;
+
+  .md-virtual-repeat-scroller {
+    .md-virtual-repeat-offsetter {
+      ul.md-autocomplete-suggestions {
+        li.md-autocomplete-suggestion[md-autocomplete-parent-scope] {
+          height: 111px !important;
+          overflow: visible !important;
+          line-height: 26px !important;
+          padding-top: 10px !important;
+
+          a.not-found {
+            display: block;
+            text-align: center;
+            margin: auto;
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+
+ds-combobox[has-create='true'],
+dds-combobox[has-create='true']{
+  position: relative;
+  md-autocomplete
+  ~ {
+    button {
+      &.has-create {
+        position: absolute;
+        top: 17px;
+        bottom: 0;
+        right: auto;
+        left: -6px;
+        z-index: 99999;
+      }
+    }
+  }
+}
+
+td ds-combobox[column-editor='true'],
+td dds-combobox[column-editor='true']{
+  display: inline-block;
+  button {
+    &.has-create {
+      display: none !important;
+    }
+  }
+}
